@@ -35,6 +35,74 @@ a{color:inherit}
  animation:floaty var(--t,7s) ease-in-out infinite alternate}
 @keyframes floaty{from{transform:translateY(-7px) rotate(-2deg)}to{transform:translateY(7px) rotate(3deg)}}
 
+/* ═══════════ SIDE STICKMAN RAILS (homepage margins) ═══════════ */
+.side-stuff{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+@media(max-width:1150px){.side-stuff{display:none}}
+.rail{position:absolute;top:0;bottom:0;display:flex;flex-direction:column;justify-content:space-evenly;padding:10vh 0}
+.rail.l{left:max(8px,2vw)}
+.rail.r{right:max(8px,2vw);align-items:flex-end}
+.stm{position:relative}
+.stm svg{width:58px;height:auto;overflow:visible}
+.stm .part{transform-box:view-box}
+.sm-draw{stroke:var(--ink);stroke-width:3;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.say{position:absolute;top:-14px;left:64px;white-space:nowrap;font-size:.92rem;color:var(--pencil);
+ background:var(--paper);border:2px solid var(--ink);border-radius:225px 15px 255px 15px/15px 255px 15px 225px;
+ padding:1px 9px;animation:sayFloat 3.2s ease-in-out infinite alternate;opacity:.9}
+.rail.r .say{left:auto;right:64px}
+.say::after{content:'';position:absolute;left:-6px;top:12px;width:9px;height:9px;background:var(--paper);
+ border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(45deg)}
+.rail.r .say::after{left:auto;right:-6px;transform:rotate(225deg)}
+@keyframes sayFloat{to{transform:translateY(-5px)}}
+/* jumping jack */
+#stm-jack{animation:jjump .62s ease-in-out infinite}
+@keyframes jjump{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+#stm-jack .armA{animation:armUp1 .62s ease-in-out infinite}
+#stm-jack .armB{animation:armUp2 .62s ease-in-out infinite}
+#stm-jack .legA{animation:legOut1 .62s ease-in-out infinite}
+#stm-jack .legB{animation:legOut2 .62s ease-in-out infinite}
+@keyframes armUp1{0%,100%{transform:rotate(16deg)}50%{transform:rotate(148deg)}}
+@keyframes armUp2{0%,100%{transform:rotate(-16deg)}50%{transform:rotate(-148deg)}}
+@keyframes legOut1{0%,100%{transform:rotate(7deg)}50%{transform:rotate(26deg)}}
+@keyframes legOut2{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(-26deg)}}
+/* walkers (homepage + overlay share these) */
+.walker svg{animation:bobw .27s ease-in-out infinite}
+.walker .legA{animation:legSw1 .55s ease-in-out infinite}
+.walker .legB{animation:legSw2 .55s ease-in-out infinite}
+.walker .armA{animation:legSw2 .55s ease-in-out infinite}
+.walker .armB{animation:legSw1 .55s ease-in-out infinite}
+.walker .dog{animation:dogbob .27s ease-in-out infinite}
+@keyframes legSw1{0%,100%{transform:rotate(23deg)}50%{transform:rotate(-23deg)}}
+@keyframes legSw2{0%,100%{transform:rotate(-23deg)}50%{transform:rotate(23deg)}}
+@keyframes bobw{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
+@keyframes dogbob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(-3deg)}}
+/* reader */
+#stm-read .fliparm{animation:rflip 8s ease-in-out infinite}
+@keyframes rflip{0%,90%,100%{transform:rotate(0)}94%{transform:rotate(-13deg)}}
+/* headstand */
+#stm-head{transform:rotate(180deg)}
+#stm-head .legA{animation:legSw1 .9s ease-in-out infinite}
+#stm-head .legB{animation:legSw2 .9s ease-in-out infinite}
+/* juggler */
+#stm-jug .armA{animation:jarm1 .55s ease-in-out infinite alternate}
+#stm-jug .armB{animation:jarm2 .55s ease-in-out infinite alternate}
+@keyframes jarm1{from{transform:rotate(-8deg)}to{transform:rotate(14deg)}}
+@keyframes jarm2{from{transform:rotate(8deg)}to{transform:rotate(-14deg)}}
+.js{position:absolute;top:-20px;left:50%;width:15px;height:15px;margin-left:-8px}
+.js svg{width:100%;height:100%}
+.js path{fill:var(--gold);stroke:var(--ink);stroke-width:1.6}
+#stm-jug .j1{animation:juggle1 1.15s linear infinite}
+#stm-jug .j2{animation:juggle2 1.15s linear infinite;animation-delay:.38s}
+#stm-jug .j3{animation:juggle3 1.15s linear infinite;animation-delay:.76s}
+@keyframes juggle1{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(20px,-30px) rotate(180deg)}100%{transform:translate(0,6px) rotate(360deg)}}
+@keyframes juggle2{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(-20px,-30px) rotate(-180deg)}100%{transform:translate(0,6px) rotate(-360deg)}}
+@keyframes juggle3{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(4px,-38px) rotate(220deg)}100%{transform:translate(0,6px) rotate(480deg)}}
+/* meditator */
+#stm-om svg{animation:omBob 3.4s ease-in-out infinite alternate}
+@keyframes omBob{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+/* click celebration */
+.stm.cheer{animation:cheerr .55s ease}
+@keyframes cheerr{35%{transform:translateY(-16px) rotate(9deg)}70%{transform:translateY(0) rotate(-7deg)}}
+
 /* ---------- hero ---------- */
 .wrap{max-width:900px;margin:0 auto;padding:0 22px}
 .hero{padding:10vh 0 4vh;text-align:center;position:relative}
@@ -111,7 +179,32 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .close{position:fixed;top:18px;right:18px;z-index:2000;width:50px;height:50px;display:grid;place-items:center;background:var(--paper);border:2.5px solid var(--ink);border-radius:55% 45% 60% 40%/40% 60% 45% 55%;box-shadow:3px 3px 0 var(--ink);transition:.2s}
 .close:hover{transform:rotate(90deg) scale(1.06)}
 .close svg{width:20px;stroke:var(--ink);stroke-width:3;fill:none;stroke-linecap:round}
-.demo{display:none;min-height:100%}
+
+/* ═══════════ OVERLAY DOODLE LAYER (fun filler inside games) ═══════════ */
+.odeco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.overlay.seamode .odeco{display:none}
+.oc{position:absolute;width:64px;opacity:.55;stroke:var(--ink);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:floaty 8s ease-in-out infinite alternate}
+.oc.otl{top:90px;left:60px}
+.oc.otr{top:80px;right:150px;animation-delay:-3s}
+.oc.obl{bottom:110px;left:130px;animation-delay:-5s}
+.oc.obr{bottom:90px;right:70px;animation-delay:-1.5s}
+.otw{position:absolute;width:16px;height:16px;opacity:.2;animation:twk 2.6s ease-in-out infinite alternate}
+.otw svg path{fill:var(--gold);stroke:var(--ink);stroke-width:1.4}
+.otw.t1{top:150px;left:120px}.otw.t2{top:300px;right:110px;animation-delay:-.8s}
+.otw.t3{bottom:210px;left:70px;animation-delay:-1.6s}.otw.t4{bottom:300px;right:190px;animation-delay:-2s}
+.otw.t5{top:64%;left:46%;animation-delay:-1.1s}
+@keyframes twk{from{opacity:.12;transform:scale(.7) rotate(0)}to{opacity:.7;transform:scale(1.15) rotate(40deg)}}
+.owalk{position:absolute;bottom:5vh;left:-90px;animation:owalkX 58s linear infinite}
+.owalk svg{width:56px;height:auto;overflow:visible}
+.owalk.w2{animation:owalkY 76s linear infinite;animation-delay:-30s}
+.owalk.w2 svg{transform:scaleX(-1)}
+@keyframes owalkX{from{left:-90px}to{left:calc(100% + 90px)}}
+@keyframes owalkY{from{left:calc(100% + 90px)}to{left:-90px}}
+.oplane{position:absolute;width:52px;opacity:.6;animation:planeFly 19s linear infinite;animation-delay:-6s}
+.oplane svg{stroke:var(--ink);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@keyframes planeFly{0%{transform:translate(-10vw,66vh) rotate(10deg)}45%{transform:translate(48vw,42vh) rotate(-5deg)}100%{transform:translate(108vw,24vh) rotate(4deg)}}
+@media(max-width:900px){.oc,.otw{display:none}.oplane{width:38px}}
+.demo{display:none;min-height:100%;position:relative;z-index:2}
 .overlay[data-demo="password"] #demo-password,
 .overlay[data-demo="trolley"] #demo-trolley,
 .overlay[data-demo="spend"]   #demo-spend,
@@ -130,7 +223,11 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .overlay[data-demo="tunnel"]  #demo-tunnel,
 .overlay[data-demo="whack"]   #demo-whack,
 .overlay[data-demo="stroop"]  #demo-stroop,
-.overlay[data-demo="count"]   #demo-count{display:block}
+.overlay[data-demo="count"]   #demo-count,
+.overlay[data-demo="pattern"] #demo-pattern,
+.overlay[data-demo="slides"]  #demo-slides,
+.overlay[data-demo="lights"]  #demo-lights,
+.overlay[data-demo="oddword"] #demo-oddword{display:block}
 .demo-inner{max-width:860px;margin:0 auto;padding:88px 24px 80px}
 .demo h2{font-family:'Gochi Hand';font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);transform:rotate(-1.2deg)}
 .demo-sub{color:var(--pencil);font-size:1.2rem;margin:.4rem 0 1.6rem;transform:rotate(-.4deg)}
@@ -215,7 +312,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 
 /* ---------- deep sea ---------- */
 #demo-sea{position:relative}
-.overlay[data-demo="sea"] #demo-sea{position:absolute;inset:0;overflow:hidden}
+.overlay[data-demo="sea"] #demo-sea{position:absolute;inset:0;overflow:hidden;z-index:2}
 .sea-viewport{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;background:#7fc9d6}
 .sea-viewport::-webkit-scrollbar{display:none}
 .sea-space{position:relative;height:18000px}
@@ -320,7 +417,6 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .si-pad svg{width:44px;height:44px;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
 .si-pad.off{opacity:.45;box-shadow:2px 2px 0 var(--ink)}
 .si-pad:not(.off):active{transform:translate(2px,2px);box-shadow:0 0 0 var(--ink)}
-/* THE GLOW FIX: .flash now overrides the dimming with full opacity + a visible glow ring */
 .si-pad.flash{opacity:1;transform:scale(1.09);box-shadow:0 0 0 5px rgba(47,42,35,.16),0 0 20px 5px rgba(224,168,60,.6),5px 6px 0 var(--ink)}
 .si-pad[data-p="0"]{background:var(--accent);border-radius:255px 18px 225px 18px/18px 225px 18px 255px}
 .si-pad[data-p="1"]{background:var(--gold);border-radius:18px 225px 18px 255px/255px 18px 225px 18px}
@@ -369,13 +465,14 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .od-cell{aspect-ratio:1;cursor:pointer;transition:transform .08s;border:2.5px solid transparent}
 .od-cell:active{transform:scale(.93)!important}
 
-/* ---------- match the doodles ---------- */
-.mt-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:460px;margin:0 auto}
-.mt-card{aspect-ratio:.82;border:2.5px solid var(--ink);border-radius:18px 225px 18px 255px/255px 18px 225px 18px;background:var(--paper2);display:grid;place-items:center;box-shadow:3px 3px 0 rgba(47,42,35,.15);transition:transform .12s,background .2s,border-color .2s}
+/* ---------- match the doodles (24 cards now) ---------- */
+.mt-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;max-width:620px;margin:0 auto}
+@media(max-width:700px){.mt-grid{grid-template-columns:repeat(4,1fr)}}
+.mt-card{aspect-ratio:.82;border:2.5px solid var(--ink);border-radius:14px 90px 14px 90px/90px 14px 90px 14px;background:var(--paper2);display:grid;place-items:center;box-shadow:3px 3px 0 rgba(47,42,35,.15);transition:transform .12s,background .2s,border-color .2s}
 .mt-card:not(.up):not(.done):hover{transform:translateY(-3px) rotate(-1deg)}
-.mt-card.back svg{width:28px;stroke:var(--pencil);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.mt-card.back svg{width:24px;stroke:var(--pencil);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .mt-card.up{background:#fffdf6;animation:rulepop .3s cubic-bezier(.3,1.6,.5,1)}
-.mt-card.up svg,.mt-card.done svg{width:44px;height:44px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.mt-card.up svg,.mt-card.done svg{width:32px;height:32px;stroke:var(--ink);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .mt-card.done{background:#e7efdf;border-color:var(--good)}
 
 /* ---------- rocket tunnel ---------- */
@@ -407,6 +504,37 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 #cfInput{font:1.4rem 'Patrick Hand';width:120px;padding:.3em .6em;background:#fffdf6;border:2.5px solid var(--ink);border-radius:18px 225px 18px 255px/255px 18px 225px 18px;text-align:center;outline:none;color:var(--ink)}
 #cfInput:focus{box-shadow:4px 4px 0 rgba(217,93,57,.28)}
 
+/* ---------- pattern recall ---------- */
+.pt-grid{display:grid;gap:9px;justify-content:center;max-width:410px;margin:0 auto}
+.pt-cell{aspect-ratio:1;border:2.5px solid var(--ink);border-radius:16px 60px 16px 60px/60px 16px 60px 16px;background:var(--paper2);cursor:pointer;transition:background .12s,transform .12s}
+.pt-cell:hover{transform:translateY(-2px)}
+.pt-cell.lit{background:var(--accent)}
+.pt-cell.good{background:var(--good);border-color:var(--good)}
+.pt-cell.miss{background:var(--bad);border-color:var(--bad);opacity:.85}
+
+/* ---------- sliding puzzle ---------- */
+.sl-grid{display:grid;grid-template-columns:repeat(3,86px);gap:9px;justify-content:center}
+.sl-tile{width:86px;height:86px;border:2.5px solid var(--ink);border-radius:18px 60px 18px 60px/60px 18px 60px 18px;background:#fffdf6;font-family:'Gochi Hand';font-size:2.2rem;box-shadow:3px 3px 0 rgba(47,42,35,.18);transition:transform .1s,background .15s}
+.sl-tile:hover:not(.blank){transform:translateY(-2px);background:#f6efdd}
+.sl-tile.blank{visibility:hidden}
+@media(max-width:420px){.sl-grid{grid-template-columns:repeat(3,minmax(70px,86px))}.sl-tile{width:100%;height:auto;aspect-ratio:1}}
+
+/* ---------- lights out ---------- */
+.lo-grid{display:grid;grid-template-columns:repeat(5,62px);gap:9px;justify-content:center}
+.lo-cell{width:62px;height:62px;border:2.5px solid var(--ink);border-radius:20px 46px 20px 46px/46px 20px 46px 20px;background:var(--paper2);cursor:pointer;transition:background .13s,box-shadow .13s}
+.lo-cell:hover{transform:translateY(-2px)}
+.lo-cell.on{background:var(--accent);box-shadow:inset 0 0 0 3px rgba(255,255,255,.28),0 0 12px rgba(217,93,57,.4)}
+@media(max-width:420px){.lo-grid{grid-template-columns:repeat(5,minmax(46px,62px))}.lo-cell{width:100%;height:auto;aspect-ratio:1}}
+
+/* ---------- odd concept out ---------- */
+.ow-wrap{display:grid;grid-template-columns:repeat(2,minmax(170px,250px));gap:1rem;justify-content:center}
+.ow-opt{padding:1.15rem .8rem;border:2.5px solid var(--ink);background:var(--paper);font-family:'Gochi Hand';font-size:1.4rem;line-height:1.1;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;box-shadow:4px 5px 0 rgba(47,42,35,.15);transition:.15s;transform:rotate(var(--r,0deg))}
+.ow-opt:hover:not(:disabled){transform:rotate(0deg) translate(-1px,-2px)}
+.ow-opt:disabled{cursor:default}
+.ow-opt.win{border-color:var(--good);color:var(--good)}
+.ow-opt.lose{opacity:.45}
+@media(max-width:480px){.ow-wrap{grid-template-columns:repeat(2,1fr);width:100%}}
+
 @media(max-width:640px){
   .hero{padding-top:8vh}
   .project{margin-left:0}
@@ -429,13 +557,97 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   <span class="bgd" style="--x:60%;--y:90%;--s:.7;--t:8s" data-depth=".6"><svg viewBox="0 0 24 24"><path d="M4 18C10 14 14 10 20 5M20 5l-8 1M20 5l-1 8"/></svg></span>
 </div>
 
+<!-- ═══════════ SIDE STICKMEN — filling the empty margins ═══════════ -->
+<aside class="side-stuff" aria-hidden="true">
+  <div class="rail l">
+    <div class="stm" id="stm-jack">
+      <span class="say">weeee</span>
+      <svg viewBox="0 0 80 120" class="sm-draw">
+        <circle cx="40" cy="15" r="9.5"/>
+        <line x1="40" y1="25" x2="40" y2="64"/>
+        <g class="part armA" style="transform-origin:40px 33px"><line x1="40" y1="33" x2="19" y2="50"/></g>
+        <g class="part armB" style="transform-origin:40px 33px"><line x1="40" y1="33" x2="61" y2="50"/></g>
+        <g class="part legA" style="transform-origin:40px 64px"><line x1="40" y1="64" x2="27" y2="104"/></g>
+        <g class="part legB" style="transform-origin:40px 64px"><line x1="40" y1="64" x2="53" y2="104"/></g>
+      </svg>
+    </div>
+    <div class="stm walker" id="stm-walk">
+      <svg viewBox="0 0 84 120" class="sm-draw">
+        <circle cx="38" cy="15" r="9.5"/>
+        <line x1="38" y1="25" x2="38" y2="64"/>
+        <line class="part" x1="22" y1="49" x2="55" y2="90" stroke-dasharray="3 4"/>
+        <g class="part armA" style="transform-origin:38px 33px"><line x1="38" y1="33" x2="22" y2="50"/></g>
+        <g class="part armB" style="transform-origin:38px 33px"><line x1="38" y1="33" x2="54" y2="50"/></g>
+        <g class="part legA" style="transform-origin:38px 64px"><line x1="38" y1="64" x2="26" y2="104"/></g>
+        <g class="part legB" style="transform-origin:38px 64px"><line x1="38" y1="64" x2="50" y2="104"/></g>
+        <g class="part dog" style="transform-origin:64px 96px">
+          <ellipse cx="63" cy="94" rx="9" ry="6"/><circle cx="72" cy="89" r="4.4"/>
+          <line x1="68" y1="85" x2="70" y2="82"/><line x1="55" y1="90" x2="51" y2="85"/>
+        </g>
+      </svg>
+    </div>
+    <div class="stm" id="stm-read">
+      <span class="say">shh… reading</span>
+      <svg viewBox="0 0 80 120" class="sm-draw">
+        <circle cx="36" cy="20" r="9.5"/>
+        <line x1="36" y1="30" x2="36" y2="70"/>
+        <g class="part fliparm" style="transform-origin:36px 44px">
+          <line x1="36" y1="44" x2="50" y2="62"/>
+          <rect x="42" y="58" width="26" height="18" rx="2" transform="rotate(12 55 67)"/>
+          <line x1="55" y1="59" x2="52" y2="75" transform="rotate(12 55 67)"/>
+        </g>
+        <line x1="36" y1="44" x2="24" y2="64"/>
+        <path d="M36 70 22 96M22 96l14-4M36 70l14 26M50 96l-14-4"/>
+        <line x1="18" y1="104" x2="58" y2="104"/>
+      </svg>
+    </div>
+  </div>
+  <div class="rail r">
+    <div class="stm" id="stm-head">
+      <span class="say">namaste</span>
+      <svg viewBox="0 0 80 120" class="sm-draw">
+        <circle cx="40" cy="15" r="9.5"/>
+        <line x1="40" y1="25" x2="40" y2="64"/>
+        <line x1="40" y1="33" x2="24" y2="106"/>
+        <line x1="40" y1="33" x2="56" y2="106"/>
+        <g class="part legA" style="transform-origin:40px 64px"><line x1="40" y1="64" x2="24" y2="98"/></g>
+        <g class="part legB" style="transform-origin:40px 64px"><line x1="40" y1="64" x2="56" y2="98"/></g>
+      </svg>
+    </div>
+    <div class="stm" id="stm-jug">
+      <span class="say">three stars!</span>
+      <span class="js j1"><svg viewBox="0 0 24 24"><path d="M12 2 13.6 10.4 22 12 13.6 13.6 12 22 10.4 13.6 2 12 10.4 10.4Z"/></svg></span>
+      <span class="js j2"><svg viewBox="0 0 24 24"><path d="M12 2 13.6 10.4 22 12 13.6 13.6 12 22 10.4 13.6 2 12 10.4 10.4Z"/></svg></span>
+      <span class="js j3"><svg viewBox="0 0 24 24"><path d="M12 2 13.6 10.4 22 12 13.6 13.6 12 22 10.4 13.6 2 12 10.4 10.4Z"/></svg></span>
+      <svg viewBox="0 0 80 120" class="sm-draw">
+        <circle cx="40" cy="30" r="9.5"/>
+        <line x1="40" y1="40" x2="40" y2="76"/>
+        <g class="part armA" style="transform-origin:40px 48px"><line x1="40" y1="48" x2="22" y2="62"/></g>
+        <g class="part armB" style="transform-origin:40px 48px"><line x1="40" y1="48" x2="58" y2="62"/></g>
+        <line x1="40" y1="76" x2="27" y2="106"/><line x1="40" y1="76" x2="53" y2="106"/>
+        <line x1="27" y1="106" x2="53" y2="106"/>
+      </svg>
+    </div>
+    <div class="stm" id="stm-om">
+      <svg viewBox="0 0 80 120" class="sm-draw">
+        <circle cx="40" cy="34" r="9.5"/>
+        <line x1="40" y1="44" x2="40" y2="80"/>
+        <line x1="40" y1="56" x2="24" y2="70"/><line x1="40" y1="56" x2="56" y2="70"/>
+        <line x1="24" y1="70" x2="24" y2="92"/><line x1="56" y1="70" x2="56" y2="92"/>
+        <line x1="24" y1="92" x2="56" y2="80"/><line x1="56" y1="92" x2="24" y2="80"/>
+        <path d="M20 104c6-4 34-4 40 0" stroke-dasharray="4 5"/>
+      </svg>
+    </div>
+  </div>
+</aside>
+
 <header class="hero wrap">
   <span style="position:relative;display:inline-block">
     <h1 class="title">doodad<span class="dot">.</span></h1>
     <svg class="circlet" viewBox="0 0 460 170" aria-hidden="true"><path d="M230 16C96 8 20 40 16 84c-4 48 94 76 216 74 124-2 216-26 214-70-2-44-96-70-200-68"/></svg>
   </span>
   <p class="subtitle">a junk drawer of tiny, extremely serious experiments</p>
-  <p class="hintline" id="hintline">the little rocket follows your cursor for free · press <b>1–9</b> · <b>0</b> · <b>b</b> · <b>q w e r t y u i</b> to hop around</p>
+  <p class="hintline" id="hintline">the little rocket follows your cursor for free · press <b>1–9</b> · <b>0</b> · <b>b</b> · <b>q w e r t y u i</b> · <b>a s d f</b> to hop around</p>
   <svg class="divider" viewBox="0 0 110 20" aria-hidden="true"><path d="M10 4 11.4 8.6 16 10l-4.6 1.4L10 16l-1.4-4.6L4 10l4.6-1.4Z"/><path d="M55 2 56.8 8.2 63 10l-6.2 1.8L55 18l-1.8-6.2L47 10l6.2-1.8Z"/><path d="M100 4l1.4 4.6L106 10l-4.6 1.4L100 16l-1.4-4.6L94 10l4.6-1.4Z"/></svg>
 </header>
 
@@ -497,7 +709,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   <a class="project" href="#" data-demo="simon" style="--rot:1.1deg;--ml:-2.5rem;--pd:1.22s">
     <span class="p-index">no.10</span>
     <span class="p-name">Tone Memory<svg class="scribble" viewBox="0 0 220 12"><path d="M3 8C45 2 90 11 130 6c35-4 65 2 87-1"/></svg></span>
-    <span class="p-teaser">watch, listen, repeat. the pads now glow properly. fail at level nine anyway.</span>
+    <span class="p-teaser">watch, listen, repeat. the pads glow properly now. fail at level nine anyway.</span>
     <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
   </a>
   <a class="project" href="#" data-demo="blind" style="--rot:-.5deg;--ml:1rem;--pd:1.33s">
@@ -527,7 +739,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   <a class="project" href="#" data-demo="match" style="--rot:-1deg;--ml:1.8rem;--pd:1.77s">
     <span class="p-index">no.15</span>
     <span class="p-name">Match the Doodles<svg class="scribble" viewBox="0 0 220 12"><path d="M3 6C45 10 90 3 130 8c35 4 68-2 87 1"/></svg></span>
-    <span class="p-teaser">flip, forget, flip again. your brain vs. twelve smug cards.</span>
+    <span class="p-teaser">twenty-four cards, twelve pairs, sixteen shapes. your brain vs. all of them.</span>
     <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
   </a>
   <a class="project" href="#" data-demo="tunnel" style="--rot:.9deg;--ml:-1.6rem;--pd:1.88s">
@@ -554,6 +766,30 @@ body.dark-cursor .puff{border-color:#f2e9d5}
     <span class="p-teaser">a crowd of doodles poses for one brief moment. how many?</span>
     <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
   </a>
+  <a class="project" href="#" data-demo="pattern" style="--rot:.9deg;--ml:-1.4rem;--pd:2.32s">
+    <span class="p-index">no.20</span>
+    <span class="p-name">Pattern Recall<svg class="scribble" viewBox="0 0 220 12"><path d="M3 8C45 2 90 11 130 6c35-4 65 2 87-1"/></svg></span>
+    <span class="p-teaser">the grid flashes. you remember. the grid gets greedier.</span>
+    <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
+  </a>
+  <a class="project" href="#" data-demo="slides" style="--rot:-1deg;--ml:2.4rem;--pd:2.43s">
+    <span class="p-index">no.21</span>
+    <span class="p-name">The Sliding Puzzle<svg class="scribble" viewBox="0 0 220 12"><path d="M3 7C40 11 85 3 125 8c35 4 70-3 92 0"/></svg></span>
+    <span class="p-teaser">eight tiles, one gap, zero mercy. order from chaos.</span>
+    <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
+  </a>
+  <a class="project" href="#" data-demo="lights" style="--rot:.6deg;--ml:-2.4rem;--pd:2.54s">
+    <span class="p-index">no.22</span>
+    <span class="p-name">Lights Out<svg class="scribble" viewBox="0 0 220 12"><path d="M3 8C50 3 95 10 135 5c30-3 60 4 82 1"/></svg></span>
+    <span class="p-teaser">every click flips its neighbors too. darkness is the goal.</span>
+    <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
+  </a>
+  <a class="project" href="#" data-demo="oddword" style="--rot:-.7deg;--ml:1.6rem;--pd:2.65s">
+    <span class="p-index">no.23</span>
+    <span class="p-name">Odd Concept Out<svg class="scribble" viewBox="0 0 220 12"><path d="M3 6C45 10 90 3 130 8c35 4 68-2 87 1"/></svg></span>
+    <span class="p-teaser">four words. three are cousins. evict the impostor.</span>
+    <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
+  </a>
 </nav>
 
 <footer>
@@ -568,6 +804,34 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 
 <div class="overlay" id="overlay" hidden>
   <button class="close" id="closeBtn" aria-label="close"><svg viewBox="0 0 24 24"><path d="M5 5c4 4.5 10 10 14 14M19 5C15 9.5 9 15 5 19"/></svg></button>
+
+  <!-- doodle filler layer for inside the games -->
+  <div class="odeco" aria-hidden="true">
+    <svg class="oc otl" viewBox="0 0 60 60"><path d="M8 46C18 24 36 14 52 11M52 11l-10 2M52 11l-4 10"/><path d="M10 52c10-4 24-4 34 2" opacity=".5"/></svg>
+    <svg class="oc otr" viewBox="0 0 60 60"><path d="M30 8C22 22 20 34 26 46c2 4 8 4 10-1 4-10-8-14-12-4"/><path d="M44 14c4-2 8-2 10 1" opacity=".5"/></svg>
+    <svg class="oc obl" viewBox="0 0 60 60"><path d="M14 40c-5 0-5-8 1-8 0-7 11-9 14-3 6-4 13 1 10 7 4 0 4 6-2 6Z"/><path d="M20 48c6-3 16-3 22 0" opacity=".5"/></svg>
+    <svg class="oc obr" viewBox="0 0 60 60"><path d="M30 30a4 4 0 1 1 4 4 8 8 0 1 1-8-8 13 13 0 1 1 13 13 18 18 0 1 1-18-18"/></svg>
+    <span class="otw t1"><svg viewBox="0 0 24 24"><path d="M12 2 13.6 10.4 22 12 13.6 13.6 12 22 10.4 13.6 2 12 10.4 10.4Z"/></svg></span>
+    <span class="otw t2"><svg viewBox="0 0 24 24"><path d="M12 2 13.6 10.4 22 12 13.6 13.6 12 22 10.4 13.6 2 12 10.4 10.4Z"/></svg></span>
+    <span class="otw t3"><svg viewBox="0 0 24 24"><path d="M12 2 13.6 10.4 22 12 13.6 13.6 12 22 10.4 13.6 2 12 10.4 10.4Z"/></svg></span>
+    <span class="otw t4"><svg viewBox="0 0 24 24"><path d="M12 2 13.6 10.4 22 12 13.6 13.6 12 22 10.4 13.6 2 12 10.4 10.4Z"/></svg></span>
+    <span class="otw t5"><svg viewBox="0 0 24 24"><path d="M12 2 13.6 10.4 22 12 13.6 13.6 12 22 10.4 13.6 2 12 10.4 10.4Z"/></svg></span>
+    <div class="owalk w1 walker"><svg viewBox="0 0 80 120" class="sm-draw">
+      <circle cx="38" cy="15" r="9.5"/><line x1="38" y1="25" x2="38" y2="64"/>
+      <g class="part armA" style="transform-origin:38px 33px"><line x1="38" y1="33" x2="22" y2="50"/></g>
+      <g class="part armB" style="transform-origin:38px 33px"><line x1="38" y1="33" x2="54" y2="50"/></g>
+      <g class="part legA" style="transform-origin:38px 64px"><line x1="38" y1="64" x2="26" y2="104"/></g>
+      <g class="part legB" style="transform-origin:38px 64px"><line x1="38" y1="64" x2="50" y2="104"/></g>
+    </svg></div>
+    <div class="owalk w2 walker"><svg viewBox="0 0 80 120" class="sm-draw">
+      <circle cx="38" cy="15" r="9.5"/><line x1="38" y1="25" x2="38" y2="64"/>
+      <g class="part armA" style="transform-origin:38px 33px"><line x1="38" y1="33" x2="22" y2="50"/></g>
+      <g class="part armB" style="transform-origin:38px 33px"><line x1="38" y1="33" x2="54" y2="50"/></g>
+      <g class="part legA" style="transform-origin:38px 64px"><line x1="38" y1="64" x2="26" y2="104"/></g>
+      <g class="part legB" style="transform-origin:38px 64px"><line x1="38" y1="64" x2="50" y2="104"/></g>
+    </svg></div>
+    <div class="oplane"><svg viewBox="0 0 52 30"><path d="M2 16 48 4 30 26l-6-9ZM48 4 24 17"/></svg></div>
+  </div>
 
   <!-- ═══ 1 · PASSWORD ═══ -->
   <section class="demo" id="demo-password"><div class="demo-inner">
@@ -809,12 +1073,12 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   </div></section>
 
   <!-- ═══ 15 · MATCH THE DOODLES ═══ -->
-  <section class="demo" id="demo-match"><div class="demo-inner" style="max-width:620px">
+  <section class="demo" id="demo-match"><div class="demo-inner" style="max-width:700px">
     <h2>Match the Doodles</h2>
-    <p class="demo-sub">twelve cards, six pairs. fewer moves, bigger ego.</p>
+    <p class="demo-sub">twenty-four cards, twelve pairs, drawn from sixteen shapes. fewer moves, bigger ego.</p>
     <div class="zn-round" style="text-align:center;margin-bottom:1rem">moves <span id="mtMoves">0</span> · best <span id="mtBestEl">—</span></div>
     <div class="mt-grid" id="mtGrid"></div>
-    <div class="qd-sub" style="text-align:center;margin-top:1rem" id="mtMsg">find all six pairs</div>
+    <div class="qd-sub" style="text-align:center;margin-top:1rem" id="mtMsg">find all twelve pairs</div>
     <div style="text-align:center;margin-top:.6rem"><button class="btn accent" id="mtBtn" hidden>shuffle again</button></div>
   </div></section>
 
@@ -871,6 +1135,45 @@ body.dark-cursor .puff{border-color:#f2e9d5}
     <div class="qd-sub" style="text-align:center;margin-top:.8rem" id="cfMsg">press start when your eyes are warmed up</div>
     <div style="text-align:center"><button class="btn accent" id="cfBtn">start</button></div>
   </div></section>
+
+  <!-- ═══ 20 · PATTERN RECALL ═══ -->
+  <section class="demo" id="demo-pattern"><div class="demo-inner" style="max-width:600px">
+    <h2>Pattern Recall</h2>
+    <p class="demo-sub">the grid flashes a pattern. memorize it. rebuild it. no notes.</p>
+    <div class="zn-round" style="text-align:center">level <span id="ptLevelEl">0</span> · best <span id="ptBestEl">0</span></div>
+    <div class="pt-grid" id="ptGrid" style="margin-top:1.2rem"></div>
+    <p class="qd-sub" style="text-align:center;margin-top:1.1rem;min-height:1.5em" id="ptMsg">press start to flash the first pattern</p>
+    <div style="text-align:center"><button class="btn accent" id="ptBtn">start</button></div>
+  </div></section>
+
+  <!-- ═══ 21 · SLIDING PUZZLE ═══ -->
+  <section class="demo" id="demo-slides"><div class="demo-inner" style="max-width:600px">
+    <h2>The Sliding Puzzle</h2>
+    <p class="demo-sub">eight tiles, one gap, zero mercy. restore the order 1–8.</p>
+    <div class="zn-round" style="text-align:center">moves <span id="slMoves">0</span> · best <span id="slBestEl">—</span></div>
+    <div class="sl-grid" id="slGrid" style="margin-top:1.2rem"></div>
+    <p class="qd-sub" style="text-align:center;margin-top:1.1rem;min-height:1.5em" id="slMsg">click a tile next to the gap to slide it</p>
+    <div style="text-align:center"><button class="btn accent" id="slBtn">scramble</button></div>
+  </div></section>
+
+  <!-- ═══ 22 · LIGHTS OUT ═══ -->
+  <section class="demo" id="demo-lights"><div class="demo-inner" style="max-width:600px">
+    <h2>Lights Out</h2>
+    <p class="demo-sub">every click flips itself and its neighbors. turn everything off.</p>
+    <div class="zn-round" style="text-align:center">moves <span id="loMoves">0</span> · best <span id="loBestEl">—</span></div>
+    <div class="lo-grid" id="loGrid" style="margin-top:1.2rem"></div>
+    <p class="qd-sub" style="text-align:center;margin-top:1.1rem;min-height:1.5em" id="loMsg">chase the lights into the corners</p>
+    <div style="text-align:center"><button class="btn accent" id="loBtn">new puzzle</button></div>
+  </div></section>
+
+  <!-- ═══ 23 · ODD CONCEPT OUT ═══ -->
+  <section class="demo" id="demo-oddword"><div class="demo-inner" style="max-width:640px">
+    <h2>Odd Concept Out</h2>
+    <p class="demo-sub">four words. three are cousins. evict the impostor.</p>
+    <div class="ho-stats">streak <b id="owStreak">0</b> · best <b id="owBestEl">0</b></div>
+    <div class="ow-wrap" id="owWrap"></div>
+    <div class="ho-out" id="owOut"></div>
+  </div></section>
 </div>
 
 <div class="toast" id="toast" role="status"></div>
@@ -913,7 +1216,7 @@ function starBurst(container,n=18){
   }
 }
 
-/* ═══════════ sound (tiny synth, no assets) ═══════════ */
+/* ═══════════ sound ═══════════ */
 let audioOn=true, AC=null;
 function tone(f,{d=.09,type='sine',v=.045,f2,at=0}={}){
   if(!audioOn) return;
@@ -941,6 +1244,15 @@ function toast(msg){
   clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove('show'),2600);
 }
 
+/* ═══════════ stickmen celebrate your clicks ═══════════ */
+function sideCheer(){
+  const all=$$('.stm');
+  if(!all.length) return;
+  const el=all[Math.floor(Math.random()*all.length)];
+  el.classList.remove('cheer'); void el.offsetWidth; el.classList.add('cheer');
+  el.addEventListener('animationend',()=>el.classList.remove('cheer'),{once:true});
+}
+
 /* ═══════════ background parallax ═══════════ */
 const bgd=$$('.bgd');
 addEventListener('mousemove',e=>{
@@ -957,6 +1269,7 @@ addEventListener('mousedown',()=>{
   rocket.classList.remove('spin'); void rocket.offsetWidth; rocket.classList.add('spin');
   for(let i=0;i<6;i++) puff();
   tone(340,{d:.06,v:.03,type:'triangle'});
+  sideCheer();
 });
 function angStep(a,b,k){return a+(((b-a+540)%360)-180)*k;}
 function puff(){
@@ -971,11 +1284,12 @@ function puff(){
 /* ═══════════ overlay plumbing ═══════════ */
 const overlay=$('#overlay');
 let currentDemo=null;
-const KEYMAP={'1':'password','2':'trolley','3':'spend','4':'sea','5':'life','6':'circle','7':'auction','8':'logo','9':'higher','0':'simon','b':'blind','q':'quick','w':'zone','e':'odd','r':'match','t':'tunnel','y':'whack','u':'stroop','i':'count'};
+const KEYMAP={'1':'password','2':'trolley','3':'spend','4':'sea','5':'life','6':'circle','7':'auction','8':'logo','9':'higher','0':'simon','b':'blind','q':'quick','w':'zone','e':'odd','r':'match','t':'tunnel','y':'whack','u':'stroop','i':'count','a':'pattern','s':'slides','d':'lights','f':'oddword'};
 const CLEANUPS={
   sea:()=>stopSea(), simon:()=>siStop(), logo:()=>{lgTimerEnd=0;},
   zone:()=>znLeave(), tunnel:()=>tnLeave(), whack:()=>wkLeave(),
-  odd:()=>odLeave(), stroop:()=>stLeave(), count:()=>cfLeave()
+  odd:()=>odLeave(), stroop:()=>stLeave(), count:()=>cfLeave(),
+  pattern:()=>ptLeave()
 };
 function leaveDemo(n){ if(n&&CLEANUPS[n]) CLEANUPS[n](); }
 function openDemo(name){
@@ -1003,6 +1317,10 @@ function openDemo(name){
   if(name==='whack') wkEnter();
   if(name==='stroop') stEnter();
   if(name==='count') cfEnter();
+  if(name==='pattern') ptEnter();
+  if(name==='slides') slEnter();
+  if(name==='lights') loEnter();
+  if(name==='oddword') owNew();
   tone(520,{d:.06,v:.035}); tone(780,{d:.08,v:.035,at:.06});
 }
 function closeDemo(){
@@ -1931,8 +2249,6 @@ function siStop(){
   siAccept=false;
   siPads.forEach(p=>p.classList.add('off'));
 }
-/* FIX: the flash now forces full opacity (it used to fight the .off dimming,
-   so the glow was invisible — especially on the ink-black pad) */
 function siFlash(p){
   tone(SI_TONES[p],{d:.3,v:.05,type:'triangle'});
   siPads[p].classList.add('flash');
@@ -2215,7 +2531,7 @@ function odEnter(){
   odBtn.textContent='start'; odBtn.hidden=false;
 }
 
-/* ═══════════ 15 · MATCH THE DOODLES ═══════════ */
+/* ═══════════ 15 · MATCH THE DOODLES (16-shape pool, 24 cards) ═══════════ */
 const MT_ICONS=[
  '<path d="M12 3 13.6 10.4 22 12 13.6 13.6 12 22 10.4 13.6 2 12 10.4 10.4Z"/>',
  '<path d="M13 2 5 13h5l-1.5 9L19 10h-5.5Z"/>',
@@ -2223,18 +2539,30 @@ const MT_ICONS=[
  '<path d="M12 20.5C7 16.5 3.5 13.4 3.5 9.7 3.5 7 5.6 5 8.1 5c1.6 0 3 .8 3.9 2.1C12.9 5.8 14.3 5 15.9 5c2.5 0 4.6 2 4.6 4.7 0 3.7-3.5 6.8-8.5 10.8Z"/>',
  '<path d="M2 12c3-6 7-8 12-6l6-3-1.5 6L20 15l-6-1c-5 2-9 0-12-2Z"/><circle cx="15.5" cy="8.5" r=".9" fill="var(--ink)" stroke="none"/>',
  '<path d="M6 16C3 16 3 12 6 12 6 8 12 7 13 10 16 8 20 10 19 13 21 13 21 16 18 16Z"/>',
+ '<path d="M12 3c5.2 0 8.6 3.6 8.6 8H3.4C3.4 6.6 6.8 3 12 3Z"/><path d="M12 11v7.2a1.9 1.9 0 0 0 3.8 0"/><path d="M12 3V1.6"/>',
+ '<circle cx="7.5" cy="15.5" r="3.5"/><path d="M10 13 20 3M15.5 7.5l2.5 2.5M12.5 10.5l2 2"/>',
+ '<circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3.4 2"/>',
+ '<circle cx="12" cy="12" r="4.4"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5 5l2.1 2.1M16.9 16.9 19 19M19 5l-2.1 2.1M7.1 16.9 5 19"/>',
+ '<path d="M4.5 11 12 4l7.5 7"/><path d="M6.5 10v10h11V10"/><path d="M10.5 20v-5.5h3V20"/>',
+ '<path d="M9.5 17.5V5.5L19 3.5v11.6"/><ellipse cx="7" cy="17.8" rx="2.6" ry="2.1"/><ellipse cx="16.5" cy="15.3" rx="2.6" ry="2.1"/>',
+ '<path d="M4 11c0-4.4 3.6-7.5 8-7.5s8 3.1 8 7.5c0 1-.8 1.6-1.8 1.6H5.8C4.8 12.6 4 12 4 11Z"/><path d="M9.5 12.6 9 19.5c0 .9.7 1.5 1.6 1.5h2.8c.9 0 1.6-.6 1.6-1.5l-.5-6.9"/><circle cx="9" cy="8" r=".9" fill="var(--ink)" stroke="none"/><circle cx="14.6" cy="7" r=".9" fill="var(--ink)" stroke="none"/>',
+ '<path d="M5.5 20.5V10.5a6.5 6.5 0 0 1 13 0v10l-2.2-1.8-2.1 1.8-2.2-1.8-2.1 1.8-2.2-1.8Z"/><circle cx="9.8" cy="10.5" r=".9" fill="var(--ink)" stroke="none"/><circle cx="14.2" cy="10.5" r=".9" fill="var(--ink)" stroke="none"/>',
+ '<path d="M4.5 17.5h15L18 8.5l-3.8 3L12 5.5l-2.2 6-3.8-3Z"/><path d="M5.5 20.5h13"/>',
+ '<path d="M5 6h11v9a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4Z"/><path d="M16 8h2.2a2.4 2.4 0 0 1 0 4.8H16"/><path d="M8.5 3.5c0 1-1 1-1 2M12 3.5c0 1-1 1-1 2" opacity=".55"/>',
 ];
 const MT_BACK='<svg viewBox="0 0 24 24"><path d="M8.6 8.8c.2-1.8 1.6-3 3.4-3 1.9 0 3.4 1.3 3.4 3.1 0 2.2-3 2.5-3 4.7"/><circle cx="12.4" cy="17.6" r=".5"/></svg>';
+const MT_PAIRS=12; /* 24 cards on the board */
 const mtGrid=$('#mtGrid'), mtMovesEl=$('#mtMoves'), mtBestEl=$('#mtBestEl'),
       mtMsg=$('#mtMsg'), mtBtn=$('#mtBtn');
 let mtOpen=[], mtLock=false, mtMoves=0, mtFound=0, mtBest=+(store.get('dd-match')||0);
 mtBestEl.textContent=mtBest?mtBest+' moves':'—';
 function mtNew(){
-  const idx=[...MT_ICONS.keys(),...MT_ICONS.keys()];
-  shuffle(idx);
+  const pool=[...MT_ICONS.keys()]; shuffle(pool);
+  const pick=pool.slice(0,MT_PAIRS);
+  const idx=[...pick,...pick]; shuffle(idx);
   mtOpen=[]; mtLock=false; mtMoves=0; mtFound=0;
   mtMovesEl.textContent=0;
-  mtMsg.textContent='find all six pairs';
+  mtMsg.textContent='find all twelve pairs';
   mtBtn.hidden=true;
   mtGrid.innerHTML='';
   idx.forEach((ic,i)=>{
@@ -2258,7 +2586,7 @@ function mtFlip(b){
       mtFound++;
       setTimeout(()=>{a.classList.add('done');c.classList.add('done');},180);
       tone(880,{d:.12,v:.045});
-      if(mtFound===6) mtWin();
+      if(mtFound===MT_PAIRS) mtWin();
     } else {
       mtLock=true;
       setTimeout(()=>{
@@ -2271,10 +2599,10 @@ function mtFlip(b){
 }
 function mtWin(){
   if(!mtBest||mtMoves<mtBest){ mtBest=mtMoves; store.set('dd-match',mtBest); mtBestEl.textContent=mtBest+' moves'; }
-  const v=mtMoves<=9?'elephant memory.':mtMoves<=12?'seriously sharp.':mtMoves<=16?'a respectable shuffle.':'the cards send their regards.';
+  const v=mtMoves<=26?'elephant memory. suspicious.':mtMoves<=34?'seriously sharp.':mtMoves<=44?'a very respectable shuffle.':'the cards send their warm regards.';
   mtMsg.innerHTML=`cleared in <b style="font-family:'Gochi Hand';font-size:1.2rem">${mtMoves}</b> moves — ${v}`;
   mtBtn.textContent='shuffle again'; mtBtn.hidden=false;
-  starBurst(mtGrid,14);
+  starBurst(mtGrid,16);
   [523,659,784].forEach((f,i)=>tone(f,{d:.14,v:.045,at:i*.09}));
 }
 mtBtn.addEventListener('click',()=>{ if(!mtLock) mtNew(); });
@@ -2330,7 +2658,6 @@ function tnTick(dt,now){
     });
     if(tnY<9||tnY>TNH-9) tnDie();
   }
-  /* draw */
   const g=tnCtx;
   g.clearRect(0,0,TNW,TNH);
   g.strokeStyle='rgba(47,42,35,.14)'; g.lineWidth=2; g.setLineDash([2,10]);
@@ -2594,6 +2921,264 @@ function cfEnter(){
   cfGuess.style.visibility='hidden';
   cfBtn.textContent='start'; cfBtn.hidden=false;
   cfMsg.textContent='press start when your eyes are warmed up';
+}
+
+/* ═══════════ 20 · PATTERN RECALL ═══════════ */
+const ptGrid=$('#ptGrid'), ptMsg=$('#ptMsg'), ptBtn=$('#ptBtn'),
+      ptLevelEl=$('#ptLevelEl'), ptBestEl=$('#ptBestEl');
+let ptRun=false, ptPhase='idle', ptLevel=0, ptLit=new Set(), ptFound=new Set(), ptTOs=[],
+    ptBest=+(store.get('dd-pattern')||0);
+ptBestEl.textContent=ptBest;
+function ptTO(fn,ms){ ptTOs.push(setTimeout(fn,ms)); }
+function ptLeave(){ ptRun=false; ptPhase='idle'; ptTOs.forEach(clearTimeout); ptTOs=[]; }
+function ptBuild(n){
+  ptGrid.style.gridTemplateColumns=`repeat(${n},1fr)`;
+  ptGrid.innerHTML='';
+  for(let i=0;i<n*n;i++){
+    const b=document.createElement('button');
+    b.className='pt-cell'; b.dataset.i=i;
+    b.addEventListener('click',()=>ptTap(i,b));
+    ptGrid.appendChild(b);
+  }
+}
+function ptStart(){
+  ptLeave(); ptRun=true; ptLevel=0;
+  ptBtn.hidden=true;
+  ptNextLevel();
+}
+function ptNextLevel(){
+  ptLevel++;
+  ptLevelEl.textContent=ptLevel;
+  if(ptLevel>ptBest){ ptBest=ptLevel; store.set('dd-pattern',ptBest); ptBestEl.textContent=ptBest; }
+  const n=ptLevel>=6?5:4;
+  ptBuild(n);
+  ptLit=new Set(); ptFound=new Set();
+  const count=Math.min(Math.round(2+ptLevel*1.3), n===4?9:15);
+  while(ptLit.size<count) ptLit.add(Math.floor(Math.random()*n*n));
+  ptPhase='show';
+  ptMsg.textContent='memorize\u2026';
+  [...ptGrid.children].forEach((c,i)=>{ if(ptLit.has(i)) c.classList.add('lit'); });
+  tone(520,{d:.08,v:.04});
+  ptTO(()=>{
+    if(!ptRun) return;
+    [...ptGrid.children].forEach(c=>c.classList.remove('lit'));
+    ptPhase='input';
+    ptMsg.textContent='now rebuild it';
+    tone(700,{d:.1,v:.04});
+  },850+count*110);
+}
+function ptTap(i,btn){
+  if(ptPhase!=='input'||ptFound.has(i)) return;
+  if(ptLit.has(i)){
+    ptFound.add(i);
+    btn.classList.add('good');
+    tone(660+ptFound.size*30,{d:.07,v:.04});
+    if(ptFound.size===ptLit.size){
+      ptPhase='wait';
+      ptMsg.innerHTML=`level <b style="font-family:'Gochi Hand';font-size:1.2rem">${ptLevel}</b> cleared — coming back meaner\u2026`;
+      starBurst(ptGrid,10);
+      [660,880,1047].forEach((f,k)=>tone(f,{d:.12,v:.04,at:k*.09}));
+      ptTO(()=>{ if(ptRun) ptNextLevel(); },1000);
+    }
+  } else {
+    ptPhase='over'; ptRun=false;
+    btn.classList.add('miss');
+    [...ptGrid.children].forEach((c,k)=>{ if(ptLit.has(k)&&!ptFound.has(k)) c.classList.add('miss'); });
+    const missed=ptLit.size-ptFound.size;
+    ptMsg.innerHTML=`so close — ${missed} tile${missed===1?'':'s'} slipped away at level <b style="font-family:'Gochi Hand';font-size:1.2rem">${ptLevel}</b>. best: ${ptBest}.`;
+    ptBtn.textContent='try again'; ptBtn.hidden=false;
+    tone(180,{d:.2,type:'square',v:.035});
+  }
+}
+ptBtn.addEventListener('click',()=>{ if(!ptRun) ptStart(); });
+function ptEnter(){
+  ptLeave();
+  ptLevel=0; ptLevelEl.textContent=0;
+  ptBuild(4);
+  ptMsg.textContent='press start to flash the first pattern';
+  ptBtn.textContent='start'; ptBtn.hidden=false;
+}
+
+/* ═══════════ 21 · SLIDING PUZZLE ═══════════ */
+const slGrid=$('#slGrid'), slMsg=$('#slMsg'), slBtn=$('#slBtn'),
+      slMovesEl=$('#slMoves'), slBestEl=$('#slBestEl');
+let slBoard=[], slMoves=0, slBest=+(store.get('dd-slides')||0), slDone=false;
+slBestEl.textContent=slBest?slBest+' moves':'—';
+const slTiles=[];
+(function slBuild(){
+  for(let p=0;p<9;p++){
+    const b=document.createElement('button');
+    b.className='sl-tile'; b.dataset.p=p;
+    b.addEventListener('click',()=>slClick(p));
+    slGrid.appendChild(b); slTiles.push(b);
+  }
+})();
+function slRender(){
+  slTiles.forEach((b,p)=>{
+    const v=slBoard[p];
+    b.textContent=v||'';
+    b.classList.toggle('blank',v===0);
+  });
+}
+function slScramble(){
+  slBoard=[1,2,3,4,5,6,7,8,0];
+  let blank=8, last=-1;
+  for(let k=0;k<140;k++){
+    const r=Math.floor(blank/3), c=blank%3;
+    const opts=[];
+    if(r>0)opts.push(blank-3); if(r<2)opts.push(blank+3);
+    if(c>0)opts.push(blank-1); if(c<2)opts.push(blank+1);
+    const pick=opts.filter(o=>o!==last)[Math.floor(Math.random()*opts.filter(o=>o!==last).length)];
+    slBoard[blank]=slBoard[pick]; slBoard[pick]=0;
+    last=blank; blank=pick;
+  }
+  slMoves=0; slDone=false;
+  slMovesEl.textContent=0;
+  slMsg.textContent='click a tile next to the gap to slide it';
+  slRender();
+  tone(420,{d:.08,v:.04});
+}
+function slClick(p){
+  if(slDone||slBoard[p]===0) return;
+  const r=Math.floor(p/3), c=p%3;
+  const blank=slBoard.indexOf(0), br=Math.floor(blank/3), bc=blank%3;
+  const adj=(r===br&&Math.abs(c-bc)===1)||(c===bc&&Math.abs(r-br)===1);
+  if(!adj){ return; }
+  slBoard[blank]=slBoard[p]; slBoard[p]=0;
+  slMoves++; slMovesEl.textContent=slMoves;
+  slRender();
+  tone(480,{d:.04,v:.03});
+  if(slBoard.join()==='1,2,3,4,5,6,7,8,0') slWin();
+}
+function slWin(){
+  slDone=true;
+  if(!slBest||slMoves<slBest){ slBest=slMoves; store.set('dd-slides',slBest); slBestEl.textContent=slBest+' moves'; }
+  const v=slMoves<=40?'puzzle prodigy. the tiles applaud.':slMoves<=70?'slick sliding. very slick.':slMoves<=110?'order restored. eventually.':'persistence: certified. efficiency: pending.';
+  slMsg.innerHTML=`solved in <b style="font-family:'Gochi Hand';font-size:1.2rem">${slMoves}</b> moves — ${v}`;
+  slBtn.textContent='scramble again';
+  starBurst(slGrid,16);
+  [523,659,784].forEach((f,i)=>tone(f,{d:.14,v:.045,at:i*.09}));
+}
+slBtn.addEventListener('click',slScramble);
+function slEnter(){ slScramble(); }
+
+/* ═══════════ 22 · LIGHTS OUT ═══════════ */
+const loGrid=$('#loGrid'), loMsg=$('#loMsg'), loBtn=$('#loBtn'),
+      loMovesEl=$('#loMoves'), loBestEl=$('#loBestEl');
+let loState=[], loMoves=0, loBest=+(store.get('dd-lights')||0), loWon=false;
+loBestEl.textContent=loBest?loBest+' moves':'—';
+const loCells=[];
+(function loBuild(){
+  for(let i=0;i<25;i++){
+    const b=document.createElement('button');
+    b.className='lo-cell';
+    b.addEventListener('click',()=>loPress(i));
+    loGrid.appendChild(b); loCells.push(b);
+  }
+})();
+function loRender(){
+  loCells.forEach((c,i)=>c.classList.toggle('on',loState[i]));
+}
+function loFlip(i){
+  loState[i]=!loState[i];
+  const r=Math.floor(i/5), c=i%5;
+  if(r>0)loState[i-5]=!loState[i-5];
+  if(r<4)loState[i+5]=!loState[i+5];
+  if(c>0)loState[i-1]=!loState[i-1];
+  if(c<4)loState[i+1]=!loState[i+1];
+}
+function loNew(){
+  do{
+    loState=Array(25).fill(false);
+    const presses=5+Math.floor(Math.random()*5);
+    for(let k=0;k<presses;k++) loFlip(Math.floor(Math.random()*25));
+  }while(loState.every(v=>!v));
+  loMoves=0; loWon=false;
+  loMovesEl.textContent=0;
+  loMsg.textContent='chase the lights into the corners';
+  loRender();
+  tone(420,{d:.08,v:.04});
+}
+function loPress(i){
+  if(loWon) return;
+  loFlip(i);
+  loMoves++; loMovesEl.textContent=loMoves;
+  loRender();
+  tone(loState[i]?600:380,{d:.05,v:.035});
+  if(loState.every(v=>!v)){
+    loWon=true;
+    if(!loBest||loMoves<loBest){ loBest=loMoves; store.set('dd-lights',loBest); loBestEl.textContent=loBest+' moves'; }
+    const v=loMoves<=10?'lightwitch supreme.':loMoves<=18?'the darkness bows to you.':loMoves<=28?'all dark. well earned.':'you got there. the scenic route, but you got there.';
+    loMsg.innerHTML=`pure darkness in <b style="font-family:'Gochi Hand';font-size:1.2rem">${loMoves}</b> moves — ${v}`;
+    starBurst(loGrid,16);
+    [392,523,659,784].forEach((f,k)=>tone(f,{d:.16,v:.045,at:k*.1}));
+  }
+}
+loBtn.addEventListener('click',()=>{ if(!loWon||true) loNew(); });
+function loEnter(){ loNew(); }
+
+/* ═══════════ 23 · ODD CONCEPT OUT ═══════════ */
+const OW=[
+ {w:['Rose','Tulip','Oak','Daisy'],odd:2,why:'an oak is a tree; the rest are flowers'},
+ {w:['Drum','Flute','Spoon','Violin'],odd:2,why:'a spoon is cutlery; the rest are instruments'},
+ {w:['Mars','Venus','Nike','Jupiter'],odd:2,why:'Nike is a shoe brand (and a goddess); the rest are planets'},
+ {w:['Bicycle','Bus','Submarine','Train'],odd:2,why:'submarines swim; the rest stick to land'},
+ {w:['Piano','Guitar','Cactus','Harp'],odd:2,why:'a cactus is a plant with opinions about touching'},
+ {w:['Sphere','Cube','Pyramid','Triangle'],odd:3,why:'a triangle is flat; the rest are solid'},
+ {w:['Everest','K2','Matterhorn','Mariana'],odd:3,why:'Mariana is a trench — it points the wrong way'},
+ {w:['Bee','Ant','Beetle','Spider'],odd:3,why:'spiders have eight legs — not even technically insects'},
+ {w:['Van Gogh','Picasso','Einstein','Dal\u00ed'],odd:2,why:'Einstein did physics, not paint-splattering'},
+ {w:['Saw','Screwdriver','Saxophone','Wrench'],odd:2,why:'a saxophone is for jazz, not furniture'},
+ {w:['Kangaroo','Koala','Platypus','Panda'],odd:3,why:'the panda is the only one without an Australian passport'},
+ {w:['Heart','Spade','Club','Comma'],odd:3,why:'a comma is punctuation; the rest are card suits'},
+ {w:['Nile','Amazon','Danube','Sahara'],odd:3,why:'the Sahara is a desert; the rest are rivers'},
+ {w:['Hammer','Ladder','Screwdriver','Wrench'],odd:1,why:'a ladder helps you climb; the rest help you hit or twist'},
+];
+const owWrap=$('#owWrap'), owOut=$('#owOut'), owStreakEl=$('#owStreak'), owBestEl=$('#owBestEl');
+let owStreak=0, owBest=+(store.get('dd-oddword')||0), owCur=null, owAnswered=false, owUsed=[];
+owBestEl.textContent=owBest;
+function owNew(){
+  let i;
+  do{ i=Math.floor(Math.random()*OW.length); }while(owUsed.includes(i)&&owUsed.length<OW.length-2);
+  owUsed.push(i); if(owUsed.length>OW.length-3) owUsed=[];
+  owCur=OW[i]; owAnswered=false;
+  const order=[0,1,2,3]; shuffle(order);
+  owWrap.innerHTML='';
+  order.forEach((wi,k)=>{
+    const b=document.createElement('button');
+    b.className='ow-opt';
+    b.style.setProperty('--r',(k%2?1.1:-1.1)+'deg');
+    b.dataset.odd=wi===owCur.odd?'1':'0';
+    b.textContent=owCur.w[wi];
+    b.addEventListener('click',()=>owPick(b));
+    owWrap.appendChild(b);
+  });
+  owOut.innerHTML='';
+}
+function owPick(btn){
+  if(owAnswered) return;
+  owAnswered=true;
+  const isOdd=btn.dataset.odd==='1';
+  const oddBtn=[...owWrap.children].find(b=>b.dataset.odd==='1');
+  [...owWrap.children].forEach(b=>b.disabled=true);
+  if(isOdd){
+    owStreak++;
+    if(owStreak>owBest){ owBest=owStreak; store.set('dd-oddword',owBest); owBestEl.textContent=owBest; }
+    btn.classList.add('win');
+    owOut.innerHTML=`<p>correct — ${owCur.why}. streak: <b style="font-family:'Gochi Hand'">${owStreak}</b>.</p>
+      <button class="btn accent" id="owNext">next round</button>`;
+    tone(700,{d:.1,v:.045}); tone(940,{d:.12,v:.045,at:.09});
+    if(owStreak%5===0) starBurst(owWrap,12);
+  } else {
+    owStreak=0;
+    btn.classList.add('lose');
+    oddBtn.classList.add('win');
+    owOut.innerHTML=`<p>nope — <b style="font-family:'Gochi Hand'">${oddBtn.textContent}</b> was the impostor: ${owCur.why}.</p>
+      <button class="btn accent" id="owNext">try another</button>`;
+    tone(300,{d:.18,type:'square',v:.03});
+  }
+  owStreakEl.textContent=owStreak;
+  $('#owNext').addEventListener('click',owNew);
 }
 
 /* ═══════════ master loop ═══════════ */
