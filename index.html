@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#faf4e6">
 <title>doodad · a junk drawer of tiny experiments</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='12' fill='%23d95d39' stroke='%232f2a23' stroke-width='2.5'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,10 +17,11 @@
   color-scheme:light;
 }
 ::selection{background:var(--accent);color:var(--paper)}
+html{-webkit-text-size-adjust:100%}
 html,body{background:var(--paper)}
 body{color:var(--ink);font-family:'Patrick Hand',cursive;overflow-x:hidden;min-height:100vh}
 body.locked{overflow:hidden}
-button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 svg{display:block}
 a{color:inherit}
 
@@ -35,12 +37,12 @@ a{color:inherit}
  animation:floaty var(--t,7s) ease-in-out infinite alternate}
 @keyframes floaty{from{transform:translateY(-7px) rotate(-2deg)}to{transform:translateY(7px) rotate(3deg)}}
 
-/* ═══════════ BUY ME A COFFEE (top corner) ═══════════ */
+/* ═══════════ BUY ME A COFFEE ═══════════ */
 .bmc{position:fixed;top:16px;right:16px;z-index:1200;display:flex;align-items:center;gap:.55rem;
  background:#ffdd00;color:var(--ink);border:2.5px solid var(--ink);
  border-radius:225px 15px 255px 15px/15px 255px 15px 225px;
  padding:.4em .9em .4em .65em;box-shadow:3px 3px 0 var(--ink);text-decoration:none;
- font-size:1.05rem;line-height:1.08;transform:rotate(1.4deg);transition:.15s}
+ font-size:1.05rem;line-height:1.08;transform:rotate(1.4deg);transition:.15s;text-align:left}
 .bmc:hover{transform:rotate(-1deg) translateY(-2px);box-shadow:4px 5px 0 var(--ink)}
 .bmc svg{width:30px;flex:0 0 30px;height:auto;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .bmc .steam path{fill:none;stroke:var(--ink);stroke-width:1.7;opacity:0;animation:steamUp 1.7s ease-in-out infinite}
@@ -179,7 +181,7 @@ body.dark-cursor #rocket{--rk:#f2e9d5;--ra:#ffb27a}
 body.dark-cursor .puff{border-color:#f2e9d5}
 
 /* ---------- overlay shell ---------- */
-.overlay{position:fixed;inset:0;z-index:1500;background:var(--paper);opacity:0;transform:scale(.985);transition:.28s ease;overflow-y:auto}
+.overlay{position:fixed;inset:0;z-index:1500;background:var(--paper);opacity:0;transform:scale(.985);transition:.28s ease;overflow-y:auto;overscroll-behavior:contain}
 .overlay.show{opacity:1;transform:none}
 .overlay.seamode{overflow:hidden}
 .overlay[hidden]{display:none}
@@ -238,7 +240,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .overlay[data-demo="alpha"]   #demo-alpha,
 .overlay[data-demo="button"]  #demo-button,
 .overlay[data-demo="rps"]     #demo-rps,
-.overlay[data-demo="stare"]   #demo-stare{display:block}
+.overlay[data-demo="draw"]    #demo-draw{display:block}
 .demo-inner{max-width:860px;margin:0 auto;padding:88px 24px 80px}
 .demo h2{font-family:'Gochi Hand';font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);transform:rotate(-1.2deg)}
 .demo-sub{color:var(--pencil);font-size:1.2rem;margin:.4rem 0 1.6rem;transform:rotate(-.4deg)}
@@ -286,6 +288,22 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 @keyframes imp{0%{opacity:0;transform:scale(.4)}30%{opacity:1;transform:scale(1.15)}100%{opacity:0;transform:scale(1.7)}}
 .lever-arm-g{transition:transform .3s;transform-box:fill-box;transform-origin:50% 100%}
 .lever.le .lever-arm-g{transform:rotate(-58deg)}
+.wspin{stroke:var(--ink);stroke-width:1.8;fill:none;stroke-linecap:round;transform-box:fill-box;transform-origin:center}
+#trolleyG.rolling .wspin{animation:wsp .35s linear infinite}
+@keyframes wsp{to{transform:rotate(180deg)}}
+.tbody{transform-box:fill-box;transform-origin:center}
+#trolleyG.rolling .tbody{animation:trumble .16s ease-in-out infinite alternate}
+@keyframes trumble{from{transform:translateY(0)}to{transform:translateY(-1.4px)}}
+.tdust{fill:var(--pencil);opacity:.55;transform-box:fill-box;transform-origin:center;animation:tdust .6s ease-out forwards}
+@keyframes tdust{to{opacity:0;transform:translate(-9px,5px) scale(1.9)}}
+#gNo .cfig,#gYes .cfig{animation:crsway 1.5s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes crsway{from{transform:rotate(-2.6deg)}to{transform:rotate(2.6deg)}}
+.sparks{stroke:var(--accent);stroke-width:2.6;stroke-linecap:round;fill:none}
+.sparks line{opacity:0;transform-box:fill-box;transform-origin:center}
+.sparks.show line{animation:sparkfly .55s ease-out forwards}
+@keyframes sparkfly{0%{opacity:1;transform:translate(0,0)}100%{opacity:0;transform:translate(var(--sx),var(--sy))}}
+.cloudy{animation:cloudDrift 9s ease-in-out infinite alternate}
+@keyframes cloudDrift{to{transform:translateX(10px)}}
 .t-progress{text-align:center;color:var(--pencil);margin-bottom:.5rem}
 .t-intro{font-size:1.35rem;max-width:56ch;margin:1rem auto .4rem;text-align:center;min-height:3.4em}
 .t-choices{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:.6rem}
@@ -324,7 +342,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 /* ---------- deep sea ---------- */
 #demo-sea{position:relative}
 .overlay[data-demo="sea"] #demo-sea{position:absolute;inset:0;overflow:hidden;z-index:2}
-.sea-viewport{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;background:#7fc9d6}
+.sea-viewport{position:absolute;inset:0;overflow-y:auto;scrollbar-width:none;background:#7fc9d6;overscroll-behavior:contain}
 .sea-viewport::-webkit-scrollbar{display:none}
 .sea-space{position:relative;height:18000px}
 .sub-sticky{position:sticky;top:34vh;height:0;display:flex;justify-content:center;z-index:2;pointer-events:none}
@@ -348,6 +366,16 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .sea-up{position:absolute;right:20px;bottom:24px;z-index:6}
 .bubble{position:absolute;border:2px solid rgba(250,244,230,.75);border-radius:50%;pointer-events:none;z-index:1;animation:rise 1.6s ease-out forwards}
 @keyframes rise{to{transform:translate(14px,-90px);opacity:0}}
+/* FIX: on phones, force notes fully on-screen (they were half-hidden off the edge) */
+@media(max-width:640px){
+  .sea-note{left:50%!important;width:min(300px,86vw);padding:.8rem .9rem}
+  .sea-note svg{width:48px}
+  .sea-note h4{font-size:1.15rem}
+  .sea-note p{font-size:.95rem}
+  .sea-depth{font-size:clamp(1.8rem,9vw,2.4rem)}
+  .sea-meta{font-size:.95rem}
+  .sea-up{bottom:90px}
+}
 
 /* ---------- life in numbers ---------- */
 .life-form{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;margin-bottom:1.3rem}
@@ -550,6 +578,11 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .al-big{font-family:'Gochi Hand';font-size:clamp(4.5rem,18vw,7rem);text-align:center;line-height:1;color:var(--accent);min-height:1.1em}
 .al-stats{display:flex;gap:1.6rem;justify-content:center;color:var(--pencil);margin:.6rem 0 1rem;flex-wrap:wrap}
 .al-stats b{font-family:'Gochi Hand';font-weight:400;font-size:1.5rem;color:var(--ink)}
+/* mobile keyboard input — focusing this opens G-board */
+#alInput{display:block;margin:.2rem auto 1rem;width:min(300px,84vw);text-align:center;
+ font:1.25rem 'Patrick Hand';padding:.45em .8em;background:#fffdf6;border:2.5px solid var(--ink);
+ border-radius:18px 225px 18px 255px/255px 18px 225px 18px;outline:none;color:var(--ink)}
+#alInput:focus{box-shadow:4px 4px 0 rgba(217,93,57,.28)}
 
 /* ---------- suspicious button ---------- */
 .bt-wrap{max-width:480px;margin:0 auto;text-align:center;padding:1.8rem 1.2rem;position:relative}
@@ -575,28 +608,16 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .rps-ch:hover:not(:disabled){transform:translateY(-3px) rotate(-2deg)}
 .rps-ch:disabled{opacity:.45;cursor:default}
 
-/* ---------- the stare-off ---------- */
-.so-box{max-width:520px;margin:0 auto;padding:1.6rem 1rem;text-align:center;position:relative;min-height:380px;display:flex;flex-direction:column;justify-content:center;gap:.9rem}
-.so-face{width:150px;margin:0 auto}
-.so-face svg{width:100%;stroke:var(--ink);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
-.so-pupil{transform-box:fill-box;transform-origin:center;transition:transform .12s}
-.so-face.blink .so-pupil{transform:scaleY(.08)}
-.so-taunt{font-family:'Gochi Hand';font-size:1.45rem;min-height:1.4em}
-.so-msg{color:var(--pencil);font-size:1.05rem;min-height:1.4em}
-.so-count{font-family:'Gochi Hand';font-size:5rem;color:var(--accent);line-height:1}
-.so-bait{position:absolute;bottom:18px;left:50%;transform:translateX(-50%) rotate(-2deg);background:var(--gold);border:2.5px solid var(--ink);border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:.35em .9em;box-shadow:3px 3px 0 var(--ink);font-size:1rem;display:none}
-.so-bait.show{display:block;animation:rulepop .3s cubic-bezier(.3,1.6,.5,1)}
+/* ---------- what's it drawing ---------- */
+.dr-stats{display:flex;gap:1.4rem;justify-content:center;color:var(--pencil);margin-bottom:.8rem;flex-wrap:wrap}
+.dr-stats b{font-family:'Gochi Hand';font-weight:400;font-size:1.4rem;color:var(--ink)}
+.dr-stage{max-width:340px;margin:0 auto;padding:1rem 1rem .8rem;text-align:center}
+.dr-stage svg{width:100%;height:auto;stroke:var(--ink);fill:none;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round}
+.dr-q{font-family:'Gochi Hand';font-size:1.35rem;color:var(--pencil);margin-top:.4rem}
 
-@media(max-width:640px){
-  .hero{padding-top:8vh}
-  .project{margin-left:0}
-  .demo-inner{padding-top:76px}
-}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 /* ═══════════ COFFEE / EASYPAISA OVERLAY ═══════════ */
-.bmc{text-align:left}
 .coffee{position:fixed;inset:0;z-index:2800;display:grid;place-items:center;padding:20px;
- background:rgba(47,42,35,.45);opacity:0;pointer-events:none;transition:opacity .25s}
+ background:rgba(47,42,35,.45);opacity:0;pointer-events:none;transition:opacity .25s;overscroll-behavior:contain}
 .coffee.show{opacity:1;pointer-events:auto}
 .cq-card{position:relative;max-width:430px;width:100%;background:var(--paper);
  border:2.5px solid var(--ink);border-radius:255px 18px 225px 18px/18px 225px 18px 255px;
@@ -625,6 +646,39 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .cq-note{color:var(--pencil);font-size:.98rem;margin-top:.8rem;line-height:1.45}
 .cq-tag{display:inline-block;margin-top:.9rem;font-family:'Gochi Hand';font-size:1.05rem;color:var(--accent);
  border:2px dashed rgba(217,93,57,.55);border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:.25em .9em;transform:rotate(1.2deg)}
+
+/* ═══════════ v2: mobile harmony · simon-6 · perf ═══════════ */
+.overlay,.sea-viewport,.coffee{overscroll-behavior:contain}
+.si-grid{grid-template-columns:repeat(3,118px);gap:12px}
+.si-pad[data-p="4"]{background:#3e6b8f;border-radius:60px 18px 60px 18px/18px 60px 18px 60px}
+.si-pad[data-p="5"]{background:#8b5fb0;border-radius:18px 60px 60px 18px/60px 18px 60px 18px}
+.si-pad[data-p="4"] svg,.si-pad[data-p="5"] svg{stroke:var(--paper)}
+@media(max-width:480px){
+  .si-grid{grid-template-columns:repeat(3,minmax(84px,106px));gap:9px}
+  .si-pad svg{width:34px;height:34px}
+}
+@media(hover:none){
+  .project:hover .p-name{animation:none}
+  .project:hover .scribble path{opacity:0}
+}
+@media(max-width:700px){
+  .odeco{display:none}
+  .bgd:nth-child(n+6){display:none}
+  .projects{gap:1.5rem}
+  .demo-inner{padding:70px 16px 60px}
+  .demo h2{font-size:clamp(2rem,8vw,2.6rem)}
+  .p-teaser{font-size:1rem}
+  .btn{min-height:46px}
+  #rocket{width:36px;height:auto}
+  .toast{bottom:76px}
+  .ho-opt{flex:1 1 100%;max-width:360px;padding:1.25rem .8rem}
+  .cf-stage{height:210px}
+  .mt-grid{gap:7px}
+  .al-big{font-size:clamp(3.4rem,20vw,4.5rem)}
+  .cq-steps li{font-size:1rem}
+  .rps-hand{width:78px;height:78px}.rps-hand svg{width:44px;height:44px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -756,7 +810,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   <a class="project" href="#" data-demo="trolley" style="--rot:.9deg;--ml:3.5rem;--pd:.28s">
     <span class="p-index">no.2</span>
     <span class="p-name">Ridiculous Trolley Problems<svg class="scribble" viewBox="0 0 220 12"><path d="M3 7C40 11 85 3 125 8c35 4 70-3 92 0"/></svg></span>
-    <span class="p-teaser">ethics class, but the professor is a runaway vehicle.</span>
+    <span class="p-teaser">ethics class, but the professor is a runaway vehicle. now with spinning wheels.</span>
     <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
   </a>
   <a class="project" href="#" data-demo="spend" style="--rot:-.7deg;--ml:-1.5rem;--pd:.41s">
@@ -798,13 +852,13 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   <a class="project" href="#" data-demo="higher" style="--rot:-.8deg;--ml:2rem;--pd:1.11s">
     <span class="p-index">no.9</span>
     <span class="p-name">Higher or Lower<svg class="scribble" viewBox="0 0 220 12"><path d="M3 8C40 3 88 11 128 6c34-4 66 3 89-1"/></svg></span>
-    <span class="p-teaser">is a sneeze faster than a racehorse? settle it forever.</span>
+    <span class="p-teaser">36 real-fact duels. is a sneeze faster than a racehorse?</span>
     <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
   </a>
   <a class="project" href="#" data-demo="simon" style="--rot:1.1deg;--ml:-2.5rem;--pd:1.22s">
     <span class="p-index">no.10</span>
     <span class="p-name">Tone Memory<svg class="scribble" viewBox="0 0 220 12"><path d="M3 8C45 2 90 11 130 6c35-4 65 2 87-1"/></svg></span>
-    <span class="p-teaser">watch, listen, repeat. the pads glow properly now. fail at level nine anyway.</span>
+    <span class="p-teaser">six pads now. it speeds up. level nine humbles everyone.</span>
     <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
   </a>
   <a class="project" href="#" data-demo="blind" style="--rot:-.5deg;--ml:1rem;--pd:1.33s">
@@ -858,7 +912,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   <a class="project" href="#" data-demo="count" style="--rot:-.8deg;--ml:1.4rem;--pd:2.21s">
     <span class="p-index">no.19</span>
     <span class="p-name">Count Fast<svg class="scribble" viewBox="0 0 220 12"><path d="M3 6C45 10 90 3 130 8c35 4 68-2 87 1"/></svg></span>
-    <span class="p-teaser">a crowd of doodles poses for one brief moment. how many?</span>
+    <span class="p-teaser">ten rounds now. a crowd of doodles poses briefly. how many?</span>
     <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
   </a>
   <a class="project" href="#" data-demo="pattern" style="--rot:.9deg;--ml:-1.4rem;--pd:2.32s">
@@ -882,13 +936,13 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   <a class="project" href="#" data-demo="oddword" style="--rot:-.7deg;--ml:1.6rem;--pd:2.65s">
     <span class="p-index">no.23</span>
     <span class="p-name">Odd Concept Out<svg class="scribble" viewBox="0 0 220 12"><path d="M3 6C45 10 90 3 130 8c35 4 68-2 87 1"/></svg></span>
-    <span class="p-teaser">four words. three are cousins. evict the impostor.</span>
+    <span class="p-teaser">30 rounds. four words. three are cousins. evict the impostor.</span>
     <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
   </a>
   <a class="project" href="#" data-demo="alpha" style="--rot:.8deg;--ml:-1.8rem;--pd:2.76s">
     <span class="p-index">no.24</span>
     <span class="p-name">Type the Alphabet<svg class="scribble" viewBox="0 0 220 12"><path d="M3 8C45 2 90 11 130 6c35-4 65 2 87-1"/></svg></span>
-    <span class="p-teaser">a to z against the clock. your keyboard has trained its whole life for this.</span>
+    <span class="p-teaser">a to z against the clock. keyboard or phone — both count.</span>
     <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
   </a>
   <a class="project" href="#" data-demo="button" style="--rot:-1deg;--ml:2.8rem;--pd:2.87s">
@@ -903,10 +957,10 @@ body.dark-cursor .puff{border-color:#f2e9d5}
     <span class="p-teaser">vs. a smug doodle that quietly studies your habits. bring your best lies.</span>
     <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
   </a>
-  <a class="project" href="#" data-demo="stare" style="--rot:-.8deg;--ml:2rem;--pd:3.09s">
+  <a class="project" href="#" data-demo="draw" style="--rot:-.8deg;--ml:2rem;--pd:3.09s">
     <span class="p-index">no.27</span>
-    <span class="p-name">The Stare-Off<svg class="scribble" viewBox="0 0 220 12"><path d="M3 6C45 10 90 3 130 8c35 4 68-2 87 1"/></svg></span>
-    <span class="p-teaser">don't move the mouse. it will taunt you. it blinks first — if you're strong.</span>
+    <span class="p-name">What's It Drawing?<svg class="scribble" viewBox="0 0 220 12"><path d="M3 6C45 10 90 3 130 8c35 4 68-2 87 1"/></svg></span>
+    <span class="p-teaser">a doodle sketches itself, line by line. name it before the pencil wins.</span>
     <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
   </a>
 </nav>
@@ -973,7 +1027,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
     <p class="demo-sub">ethics class, but the professor is a runaway vehicle.</p>
     <div class="t-scene card" id="tScene" style="padding:14px 8px 0">
       <svg id="tSvg" viewBox="0 0 720 290" aria-hidden="true">
-        <g class="dood" opacity=".6">
+        <g class="dood cloudy" opacity=".6">
           <path d="M70 46c-4 0-4-6 1-6 0-6 10-7 12-2 5-3 10 1 8 5 3 0 3 4-1 4Z"/>
           <path d="M330 32c4-5 9-5 13 0m0 0c4-5 9-5 13 0"/>
         </g>
@@ -991,15 +1045,32 @@ body.dark-cursor .puff{border-color:#f2e9d5}
         <g transform="translate(648 84)"><g id="impactYes" class="impact"><path d="M0-15 3.5-4.5 15-8 6.5 0 15 8 3.5 4.5 0 15-3.5 4.5-15 8-6.5 0-15-8-3.5-4.5Z"/></g></g>
         <text id="bonkNo" class="bonk" x="536" y="140" text-anchor="middle">bonk.</text>
         <text id="bonkYes" class="bonk" x="536" y="68" text-anchor="middle">bonk.</text>
+        <g id="sparksNo" class="sparks" transform="translate(648 160)">
+          <line x1="0" y1="-17" x2="0" y2="-25" style="--sx:0px;--sy:-14px"/>
+          <line x1="15" y1="-6" x2="24" y2="-10" style="--sx:13px;--sy:-8px"/>
+          <line x1="-14" y1="9" x2="-23" y2="14" style="--sx:-13px;--sy:9px"/>
+          <line x1="10" y1="15" x2="17" y2="23" style="--sx:9px;--sy:15px"/>
+        </g>
+        <g id="sparksYes" class="sparks" transform="translate(648 84)">
+          <line x1="0" y1="-17" x2="0" y2="-25" style="--sx:0px;--sy:-14px"/>
+          <line x1="-15" y1="-6" x2="-24" y2="-10" style="--sx:-13px;--sy:-8px"/>
+          <line x1="14" y1="9" x2="23" y2="14" style="--sx:13px;--sy:9px"/>
+          <line x1="-10" y1="15" x2="-17" y2="23" style="--sx:-9px;--sy:15px"/>
+        </g>
+        <g id="dustG"></g>
         <g id="trolleyG" transform="translate(30 166)">
-          <path d="M-16-6c-1-12 6-21 16-21s17 9 16 21Z" fill="#fffdf6" stroke="#2f2a23" stroke-width="2.4" stroke-linejoin="round"/>
-          <circle cx="0" cy="-17" r="4.4" fill="none" stroke="#d95d39" stroke-width="2.2"/>
-          <path d="M-16-13c-7 2-9 9-7 14l8-5Z" fill="#f3ead6" stroke="#2f2a23" stroke-width="2.2" stroke-linejoin="round"/>
-          <path d="M16-13c7 2 9 9 7 14l-8-5Z" fill="#f3ead6" stroke="#2f2a23" stroke-width="2.2" stroke-linejoin="round"/>
-          <path d="M-8-6v5M8-6v5" stroke="#2f2a23" stroke-width="2.2"/>
+          <g class="tbody">
+            <path d="M-16-6c-1-12 6-21 16-21s17 9 16 21Z" fill="#fffdf6" stroke="#2f2a23" stroke-width="2.4" stroke-linejoin="round"/>
+            <circle cx="0" cy="-17" r="4.4" fill="none" stroke="#d95d39" stroke-width="2.2"/>
+            <path d="M-16-13c-7 2-9 9-7 14l8-5Z" fill="#f3ead6" stroke="#2f2a23" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M16-13c7 2 9 9 7 14l-8-5Z" fill="#f3ead6" stroke="#2f2a23" stroke-width="2.2" stroke-linejoin="round"/>
+            <path d="M-8-6v5M8-6v5" stroke="#2f2a23" stroke-width="2.2"/>
+            <path d="M0-27c1-6 7-10 12-9" stroke="#2f2a23" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          </g>
           <circle cx="-8" cy="2" r="4.2" fill="#fffdf6" stroke="#2f2a23" stroke-width="2.2"/>
           <circle cx="8" cy="2" r="4.2" fill="#fffdf6" stroke="#2f2a23" stroke-width="2.2"/>
-          <path d="M0-27c1-6 7-10 12-9" stroke="#2f2a23" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+          <g class="wspin"><path d="M-8 -2.2V6.2M-12.2 2H-3.8"/></g>
+          <g class="wspin"><path d="M8 -2.2V6.2M3.8 2H12.2"/></g>
         </g>
       </svg>
     </div>
@@ -1133,7 +1204,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   <!-- ═══ 10 · TONE MEMORY ═══ -->
   <section class="demo" id="demo-simon"><div class="demo-inner" style="max-width:520px">
     <h2>Tone Memory</h2>
-    <p class="demo-sub">simon says nothing. just watch, listen, repeat.</p>
+    <p class="demo-sub">six pads. it speeds up. watch, listen, repeat.</p>
     <div class="si-wrap">
       <div class="si-grid" id="siGrid"></div>
       <div class="si-lv" id="siLv">level —</div>
@@ -1244,7 +1315,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   <section class="demo" id="demo-count"><div class="demo-inner" style="max-width:640px">
     <h2>Count Fast</h2>
     <p class="demo-sub">a crowd of doodles poses for one brief moment. how many were there?</p>
-    <div class="zn-round" style="text-align:center;margin-bottom:1rem">round <span id="cfRound">0</span>/5 · score <span id="cfScore">0</span></div>
+    <div class="zn-round" style="text-align:center;margin-bottom:1rem">round <span id="cfRound">0</span>/10 · score <span id="cfScore">0</span></div>
     <div class="cf-stage card" id="cfStage"></div>
     <div class="cf-guess" id="cfGuess" style="visibility:hidden">
       <input id="cfInput" inputmode="numeric" placeholder="?" aria-label="your count">
@@ -1298,12 +1369,13 @@ body.dark-cursor .puff{border-color:#f2e9d5}
     <h2>Type the Alphabet</h2>
     <p class="demo-sub">a → z against the clock. wrong keys cost half a second and a little dignity.</p>
     <div class="al-big" id="alNext">–</div>
+    <input id="alInput" type="text" inputmode="text" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="tap here &amp; type a → z" aria-label="type the alphabet here">
     <div class="al-stats">
       <span>progress <b id="alProg">0/26</b></span>
       <span>time <b id="alTime">0.00 s</b></span>
       <span>best <b id="alBestEl">—</b></span>
     </div>
-    <p class="qd-sub" style="text-align:center;min-height:1.4em" id="alMsg">press start, then just… type</p>
+    <p class="qd-sub" style="text-align:center;min-height:1.4em" id="alMsg">press start — on phones the keyboard opens for you</p>
     <div style="text-align:center"><button class="btn accent" id="alBtn">start typing</button></div>
   </div></section>
 
@@ -1342,24 +1414,19 @@ body.dark-cursor .puff{border-color:#f2e9d5}
     </div>
   </div></section>
 
-  <!-- ═══ 27 · THE STARE-OFF ═══ -->
-  <section class="demo" id="demo-stare"><div class="demo-inner" style="max-width:620px">
-    <h2>The Stare-Off</h2>
-    <p class="demo-sub">do not move the mouse. it will taunt you. it blinks first — if you're strong.</p>
-    <div class="so-box card" id="soBox">
-      <div class="zn-round" style="text-align:center">streak <span id="soRoundEl">0</span> · best <span id="soBestEl">0</span></div>
-      <div class="so-face" id="soFace"><svg viewBox="0 0 120 110">
-        <circle cx="60" cy="55" r="44"/>
-        <g><circle cx="45" cy="48" r="11" fill="#fff"/><circle class="so-pupil" cx="45" cy="48" r="5" fill="var(--ink)" stroke="none"/></g>
-        <g><circle cx="75" cy="48" r="11" fill="#fff"/><circle class="so-pupil" cx="75" cy="48" r="5" fill="var(--ink)" stroke="none"/></g>
-        <path d="M46 78c8 5 20 5 28 0"/>
-      </svg></div>
-      <div class="so-count" id="soCount" hidden>3</div>
-      <div class="so-taunt" id="soTaunt">it is watching you read this.</div>
-      <p class="so-msg" id="soMsg">keep your cursor perfectly still — temptation included.</p>
-      <button class="btn accent" id="soBtn">begin the contest</button>
-      <button class="so-bait" id="soBait">free bonus points — click</button>
+  <!-- ═══ 27 · WHAT'S IT DRAWING? ═══ -->
+  <section class="demo" id="demo-draw"><div class="demo-inner" style="max-width:600px">
+    <h2>What's It Drawing?</h2>
+    <p class="demo-sub">a doodle sketches itself, one line at a time. name it before the pencil wins.</p>
+    <div class="dr-stats">round <span id="drRoundEl">0</span>/8 · score <span id="drScoreEl">0</span> · best <span id="drBestEl">0</span></div>
+    <div class="od-timer"><i id="drBar"></i></div>
+    <div class="dr-stage card" id="drStage">
+      <svg viewBox="0 0 100 100"><path id="drPath" d="M20 55c8-25 45-25 52 2"/></svg>
+      <div class="dr-q" id="drQ">it is waiting…</div>
     </div>
+    <div class="ow-wrap" id="drOpts" style="margin-top:1.2rem"></div>
+    <div class="qd-sub" style="text-align:center;margin-top:1rem;min-height:1.4em" id="drMsg">press start when ready</div>
+    <div style="text-align:center"><button class="btn accent" id="drBtn">start drawing</button></div>
   </div></section>
 </div>
 
@@ -1371,8 +1438,6 @@ body.dark-cursor .puff{border-color:#f2e9d5}
     <div class="cq-h">buy the doodles a chai</div>
     <p class="cq-sub">scan with Easypaisa — or any camera app</p>
     <div class="cq-frame">
-      <!-- ▼▼ YOUR QR: keep easypaisa-qr.png next to this HTML file,
-           or paste a base64 data-URI here instead ▼▼ -->
       <img class="cq-img" src="easypaisa-qr.png" alt="Easypaisa QR code" draggable="false"
            onerror="this.style.display='none';document.getElementById('epFall').style.display='grid'">
       <div class="cq-fall" id="epFall">
@@ -1388,7 +1453,6 @@ body.dark-cursor .puff{border-color:#f2e9d5}
         <p>QR missing — save your Easypaisa QR<br>as <b>easypaisa-qr.png</b> next to this HTML file</p>
       </div>
     </div>
-    <!-- ▼ edit the name below if you like ▼ -->
     <div class="cq-name">EASYPAISA · <b>Shayan Ahmad</b></div>
     <ol class="cq-steps">
       <li><span class="cq-n">1</span><span>Open the <b>Easypaisa app</b> — or any camera app that scans QR codes.</span></li>
@@ -1423,6 +1487,8 @@ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 const rand=(a,b)=>a+Math.random()*(b-a);
 const fmt=n=>'$'+Math.round(n).toLocaleString('en-US');
 const isCoarse=matchMedia('(pointer:coarse)').matches;
+const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let puffN=0;
 if(isCoarse) $('#hintline').textContent='the little rocket wanders on its own here · tap a title to begin';
 const store={
   get:k=>{try{return localStorage.getItem(k)}catch(e){return null}},
@@ -1470,6 +1536,7 @@ function toast(msg){
 
 /* ═══════════ stickmen celebrate your clicks ═══════════ */
 function sideCheer(){
+  if(REDUCED||currentDemo) return;
   const all=$$('.stm');
   if(!all.length) return;
   const el=all[Math.floor(Math.random()*all.length)];
@@ -1477,9 +1544,9 @@ function sideCheer(){
   el.addEventListener('animationend',()=>el.classList.remove('cheer'),{once:true});
 }
 
-/* ═══════════ background parallax ═══════════ */
+/* ═══════════ background parallax (skipped on touch / reduced motion) ═══════════ */
 const bgd=$$('.bgd');
-addEventListener('mousemove',e=>{
+if(!isCoarse&&!REDUCED) addEventListener('mousemove',e=>{
   const nx=e.clientX/innerWidth-.5, ny=e.clientY/innerHeight-.5;
   bgd.forEach(b=>{const d=+b.dataset.depth*34; b.style.transform=`translate(${(-nx*d).toFixed(1)}px,${(-ny*d).toFixed(1)}px)`;});
 },{passive:true});
@@ -1490,6 +1557,7 @@ let rx=-90, ry=innerHeight*.3, rvx=0, rvy=0, tx=rx, ty=ry, lastMove=0, curAng=0,
 addEventListener('mousemove',e=>{tx=e.clientX; ty=e.clientY; lastMove=performance.now();},{passive:true});
 addEventListener('touchmove',e=>{const t=e.touches[0]; tx=t.clientX; ty=t.clientY; lastMove=performance.now();},{passive:true});
 addEventListener('mousedown',()=>{
+  if(REDUCED) return;
   rocket.classList.remove('spin'); void rocket.offsetWidth; rocket.classList.add('spin');
   for(let i=0;i<6;i++) puff();
   tone(340,{d:.06,v:.03,type:'triangle'});
@@ -1497,24 +1565,25 @@ addEventListener('mousedown',()=>{
 });
 function angStep(a,b,k){return a+(((b-a+540)%360)-180)*k;}
 function puff(){
-  const p=document.createElement('div'); p.className='puff';
+  if(REDUCED||puffN>12) return;
+  const p=document.createElement('div'); p.className='puff'; puffN++;
   const rad=(curAng-180)*Math.PI/180;
   p.style.left=(rx+Math.cos(rad)*24+rand(-4,4))+'px';
   p.style.top =(ry+Math.sin(rad)*24+rand(-4,4))+'px';
   const s=rand(6,14); p.style.width=p.style.height=s+'px';
-  document.body.appendChild(p); setTimeout(()=>p.remove(),720);
+  document.body.appendChild(p); setTimeout(()=>{p.remove(); puffN--;},720);
 }
 
 /* ═══════════ overlay plumbing ═══════════ */
 const overlay=$('#overlay');
 let currentDemo=null;
-const KEYMAP={'1':'password','2':'trolley','3':'spend','4':'sea','5':'life','6':'circle','7':'auction','8':'logo','9':'higher','0':'simon','b':'blind','q':'quick','w':'zone','e':'odd','r':'match','t':'tunnel','y':'whack','u':'stroop','i':'count','a':'pattern','s':'slides','d':'lights','f':'oddword','g':'alpha','h':'button','j':'rps','k':'stare'};
+const KEYMAP={'1':'password','2':'trolley','3':'spend','4':'sea','5':'life','6':'circle','7':'auction','8':'logo','9':'higher','0':'simon','b':'blind','q':'quick','w':'zone','e':'odd','r':'match','t':'tunnel','y':'whack','u':'stroop','i':'count','a':'pattern','s':'slides','d':'lights','f':'oddword','g':'alpha','h':'button','j':'rps','k':'draw'};
 const CLEANUPS={
   sea:()=>stopSea(), simon:()=>siStop(), logo:()=>{lgTimerEnd=0;},
   zone:()=>znLeave(), tunnel:()=>tnLeave(), whack:()=>wkLeave(),
   odd:()=>odLeave(), stroop:()=>stLeave(), count:()=>cfLeave(),
-  pattern:()=>ptLeave(), alpha:()=>{alRun=false;},
-  rps:()=>rpsLeave(), stare:()=>soLeave()
+  pattern:()=>ptLeave(), alpha:()=>{alRun=false; if(window.alInput) alInput.blur();},
+  rps:()=>rpsLeave(), draw:()=>drLeave()
 };
 function leaveDemo(n){ if(n&&CLEANUPS[n]) CLEANUPS[n](); }
 function openDemo(name){
@@ -1549,7 +1618,7 @@ function openDemo(name){
   if(name==='alpha') alEnter();
   if(name==='button') btState();
   if(name==='rps') rpsEnter();
-  if(name==='stare') soEnter();
+  if(name==='draw') drEnter();
   tone(520,{d:.06,v:.035}); tone(780,{d:.08,v:.035,at:.06});
 }
 function closeDemo(){
@@ -1693,15 +1762,23 @@ const trolleyG=$('#trolleyG'), trackNoP=$('#trackNo'), trackYesP=$('#trackYes'),
       gNo=$('#gNo'), gYes=$('#gYes'), labelNo=$('#labelNo'), labelYes=$('#labelYes'),
       lever=$('#lever'), tScene=$('#tScene'), tIntro=$('#tIntro'), tChoices=$('#tChoices'),
       tVerdict=$('#tVerdict'), tVerdictText=$('#tVerdictText'), tFinal=$('#tFinal'),
-      impactNo=$('#impactNo'), impactYes=$('#impactYes'), bonkNo=$('#bonkNo'), bonkYes=$('#bonkYes');
+      impactNo=$('#impactNo'), impactYes=$('#impactYes'), bonkNo=$('#bonkNo'), bonkYes=$('#bonkYes'),
+      sparksNo=$('#sparksNo'), sparksYes=$('#sparksYes'), dustG=$('#dustG');
+let dustAcc=0, lastTrX=30, lastTrY=160;
+function spawnDust(x,y){
+  const c=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('cx',(x+rand(-3,3)).toFixed(1)); c.setAttribute('cy',(y+rand(2,6)).toFixed(1));
+  c.setAttribute('r',rand(2.4,4.4).toFixed(1)); c.setAttribute('class','tdust');
+  dustG.appendChild(c); setTimeout(()=>c.remove(),620);
+}
 let tOrder=[...SCEN.keys()], tPtr=0, pulls=0, riding=null, rideT0=0, chosePull=false;
 function crowdHTML(spec,x,y){
   if(spec.n){
     const offs=[[-16,0],[16,2],[0,-5],[-8,7],[9,8]].slice(0,spec.n);
     return `<g transform="translate(${x} ${y})">`+offs.map(o=>
-      `<g transform="translate(${o[0]} ${o[1]})"><circle cx="0" cy="-13" r="4.6"/><path d="M0 -8 V2 M0 -5 L-6 -1 M0 -5 L6 -1 M0 2 L-5 12 M0 2 L5 12"/></g>`).join('')+'</g>';
+      `<g transform="translate(${o[0]} ${o[1]})"><g class="cfig"><circle cx="0" cy="-13" r="4.6"/><path d="M0 -8 V2 M0 -5 L-6 -1 M0 -5 L6 -1 M0 2 L-5 12 M0 2 L5 12"/></g></g>`).join('')+'</g>';
   }
-  return `<g transform="translate(${x} ${y-8}) scale(1.6)">${OBJ[spec.k]}</g>`;
+  return `<g transform="translate(${x} ${y-8}) scale(1.6)"><g class="cfig">${OBJ[spec.k]}</g></g>`;
 }
 [['trackNo'],['trackYes']].forEach(([id])=>{
   const p=document.getElementById(id), L=p.getTotalLength(), ties=$('#ties');
@@ -1722,14 +1799,17 @@ function loadT(){
   gNo.innerHTML=crowdHTML(s.a,600,158); gYes.innerHTML=crowdHTML(s.b,600,82);
   trolleyG.setAttribute('transform','translate(30 166)');
   lever.classList.remove('le');
-  [impactNo,impactYes,bonkNo,bonkYes].forEach(e=>e.classList.remove('show'));
+  [impactNo,impactYes,bonkNo,bonkYes,sparksNo,sparksYes].forEach(e=>e.classList.remove('show'));
+  trolleyG.classList.remove('rolling'); dustG.innerHTML='';
   tVerdict.hidden=true; tChoices.style.display='flex'; tFinal.hidden=true;
 }
 function tChoose(pulled){
   if(riding) return;
   riding=pulled?'yes':'no'; chosePull=pulled;
   tChoices.style.display='none';
-  tone(880,{d:.28,type:'sawtooth',v:.026,f2:420});
+  tone(690,{d:.1,v:.032}); tone(920,{d:.1,v:.032,at:.12});
+  tone(880,{d:.28,type:'sawtooth',v:.026,f2:420,at:.2});
+  trolleyG.classList.add('rolling'); dustAcc=0;
   if(pulled){ lever.classList.add('le'); pulls++; $('#tPulls').textContent=pulls; }
   rideT0=performance.now();
 }
@@ -2393,21 +2473,39 @@ const HO=[
  {q:'Which weighs more?',a:['Blue whale',150000,'kg'],b:['Boeing 747, fully fueled',400000,'kg']},
  {q:'Which weighs more?',a:['African elephant',6000,'kg'],b:['T. rex (best guess)',8000,'kg']},
  {q:'Which weighs more?',a:['One average cumulus cloud',500000,'kg'],b:['10 elephants',60000,'kg']},
+ {q:'Which weighs more?',a:['A brown bear',300,'kg'],b:['A grand piano',400,'kg']},
+ {q:'Which eats more per day?',a:['An elephant',150,'kg of food'],b:['A panda',40,'kg of bamboo']},
  {q:'Which is taller?',a:['Eiffel Tower',330,'m'],b:['Statue of Liberty',93,'m']},
  {q:'Which is taller?',a:['A giraffe',5.5,'m'],b:['A double-decker bus',4.4,'m']},
+ {q:'Which is taller?',a:['Burj Khalifa',828,'m'],b:['Golden Gate Bridge tower',227,'m']},
+ {q:'Which is taller?',a:['An ostrich',2.7,'m'],b:['A standard door',2,'m']},
+ {q:'Which is taller?',a:['A redwood tree',115,'m'],b:['Big Ben',96,'m']},
  {q:'Which is faster?',a:['Peregrine falcon (dive)',389,'km/h'],b:['Formula 1 car',360,'km/h']},
  {q:'Which is faster?',a:['An ostrich',70,'km/h'],b:['Usain Bolt',44,'km/h']},
  {q:'Which is faster?',a:['A sneeze',160,'km/h'],b:['A racehorse',70,'km/h']},
+ {q:'Which is faster?',a:['A lion',80,'km/h'],b:['A greyhound',72,'km/h']},
+ {q:'Which is faster?',a:['A squirrel',20,'km/h'],b:['A housefly',7,'km/h']},
+ {q:'Which is faster?',a:['A raindrop falling',30,'km/h'],b:['A falling snowflake',3,'km/h']},
  {q:'Which is older?',a:['Sharks',450000000,'years'],b:['Trees',385000000,'years']},
  {q:'Which is older?',a:['Oxford University',925,'years'],b:['The Aztec Empire',600,'years']},
  {q:'Which is older?',a:['Great Pyramid of Giza',4500,'years'],b:['The last woolly mammoths',4000,'years']},
+ {q:'Which is older?',a:['Chess',1500,'years'],b:['Monopoly',90,'years']},
+ {q:'Which is older?',a:['Sliced bread',96,'years'],b:['The World Wide Web',35,'years']},
+ {q:'Which lives longer?',a:['Greenland shark',400,'years'],b:['Gal\u00e1pagos tortoise',150,'years']},
  {q:'Which has more?',a:['Bones in a human baby',270,'bones'],b:['Bones in a human adult',206,'bones']},
  {q:'Which has more?',a:['Hearts in an earthworm',5,'hearts'],b:['Hearts in an octopus',3,'hearts']},
  {q:'Which has more?',a:['Known moons of Saturn',146,'moons'],b:['Known moons of Jupiter',95,'moons']},
+ {q:'Which has more?',a:['Keys on a piano',88,'keys'],b:['Strings on a harp',47,'strings']},
+ {q:'Which has more?',a:['Human taste buds',9000,'buds'],b:['A cat\u2019s taste buds',470,'buds']},
+ {q:'Which has more?',a:['A garden snail',14000,'teeth'],b:['A great white shark',3000,'teeth']},
+ {q:'Which has more?',a:['A crab',10,'legs'],b:['An insect',6,'legs']},
  {q:'Which is longer?',a:['The Great Wall of China',21196,'km'],b:['The Amazon River',6400,'km']},
+ {q:'Which is longer?',a:['A blue whale',30,'m'],b:['A basketball court',28,'m']},
  {q:'Which is hotter?',a:['A lightning bolt',30000,'\u00b0C'],b:['The surface of the Sun',5500,'\u00b0C']},
+ {q:'Which is colder?',a:['Coldest Antarctic air',-89,'\u00b0C'],b:['Dry ice',-78,'\u00b0C']},
  {q:'Which holds more water?',a:['Lake Baikal',23600,'km\u00b3'],b:['Lake Superior',12000,'km\u00b3']},
  {q:'Which has more?',a:['Neurons in an octopus',500000000,'neurons'],b:['Neurons in a dog',530000000,'neurons']},
+ {q:'Which has more?',a:['An Olympic pool',2500,'m\u00b3 of water'],b:['A hot tub',1.2,'m\u00b3 of water']},
 ];
 const fmtV=v=>v.toLocaleString('en-US');
 let hoPrev=-1, hoStreak=0, hoBest=+(store.get('dd-higher')||0), hoCur=null;
@@ -2456,13 +2554,15 @@ function hoPick(side){
  $('#hoA').addEventListener('click',()=>hoPick('A'));
  $('#hoB').addEventListener('click',()=>hoPick('B'));
 
-/* ═══════════ 10 · TONE MEMORY ═══════════ */
-const SI_TONES=[262,330,392,523];
+/* ═══════════ 10 · TONE MEMORY (6 pads) ═══════════ */
+const SI_TONES=[262,330,392,523,659,784];
 const SI_ICONS=[
  '<path d="M12 3 13.6 10.4 22 12 13.6 13.6 12 22 10.4 13.6 2 12 10.4 10.4Z"/>',
  '<path d="M13 2 5 13h5l-1.5 9L19 10h-5.5Z"/>',
  '<path d="M14.5 3.5C9.5 4 6 8 6 12.6 6 17.5 9.8 21 14.6 21c2 0 3.9-.6 5.4-1.8-5.4.4-9.8-3.4-9.8-8.4 0-3 1.6-5.6 4.3-7.3Z"/>',
  '<path d="M12 3c3.5 4.5 6 7.8 6 11a6 6 0 0 1-12 0c0-3.2 2.5-6.5 6-11Z"/>',
+ '<path d="M12 4v16M5.1 8l13.8 8M18.9 8 5.1 16"/>',
+ '<path d="M12 3 21 12l-9 9-9-9Z"/><path d="M7.5 12h9" opacity=".5"/>',
 ];
 const siGrid=$('#siGrid'), siLv=$('#siLv'), siMsg=$('#siMsg'), siStart=$('#siStart');
 let siSeq=[], siPos=0, siAccept=false, siTimers=[], siBest=+(store.get('dd-simon')||0);
@@ -2490,7 +2590,7 @@ function siPlay(){
   siPads.forEach(p=>p.classList.add('off'));
   siMsg.textContent='watch closely\u2026';
   siLv.textContent=`level ${siSeq.length}`;
-  const gap=Math.max(340,620-siSeq.length*18);
+  const gap=Math.max(240,600-siSeq.length*26);
   siSeq.forEach((p,i)=>siTimer(()=>siFlash(p),550+i*gap));
   siTimer(()=>{
     siAccept=true; siPos=0;
@@ -2499,7 +2599,7 @@ function siPlay(){
   },550+siSeq.length*gap);
 }
 function siExtend(){
-  siSeq.push(Math.floor(Math.random()*4));
+  siSeq.push(Math.floor(Math.random()*SI_TONES.length));
   siPlay();
 }
 function siInput(i){
@@ -2517,7 +2617,7 @@ function siOver(){
   siStop();
   const remembered=siSeq.length-1;
   if(remembered>siBest){ siBest=remembered; store.set('dd-simon',siBest); }
-  siMsg.textContent=`you remembered ${remembered} tone${remembered===1?'':'s'}. best: ${siBest}.`;
+  siMsg.textContent=`you remembered ${remembered} tone${remembered===1?'':'s'} across 6 pads. best: ${siBest}.`;
   siLv.textContent='level —';
   siStart.textContent='try again';
   siStart.hidden=false;
@@ -3079,11 +3179,12 @@ function stEnter(){
   stMsg.textContent='click the color of the INK — not the word';
 }
 
-/* ═══════════ 19 · COUNT FAST ═══════════ */
+/* ═══════════ 19 · COUNT FAST (10 rounds) ═══════════ */
 const CF_PATHS=[MT_ICONS[0],MT_ICONS[3],MT_ICONS[4],MT_ICONS[1]];
 const cfStage=$('#cfStage'), cfInput=$('#cfInput'), cfGo=$('#cfGo'),
       cfMsg=$('#cfMsg'), cfBtn=$('#cfBtn'), cfRoundEl=$('#cfRound'), cfScoreEl=$('#cfScore'),
       cfGuess=$('#cfGuess');
+const CF_ROUNDS=10;
 let cfRun=false, cfPhase='idle', cfRound=0, cfScore=0, cfN=0, cfTO=null;
 function cfLeave(){ cfRun=false; clearTimeout(cfTO); cfStage.innerHTML=''; }
 function cfStart(){
@@ -3093,7 +3194,7 @@ function cfStart(){
 }
 function cfNext(){
   cfRound++; cfRoundEl.textContent=cfRound;
-  cfN=Math.floor(rand(5,9+cfRound*5));
+  cfN=Math.min(30,Math.floor(rand(5,6+cfRound*2.6)));
   const shape=CF_PATHS[Math.floor(Math.random()*CF_PATHS.length)];
   cfStage.innerHTML='';
   for(let i=0;i<cfN;i++){
@@ -3109,7 +3210,7 @@ function cfNext(){
   cfPhase='show';
   cfGuess.style.visibility='hidden';
   tone(520,{d:.06,v:.04});
-  const ms=Math.min(2100,650+cfN*45);
+  const ms=Math.min(2800,700+cfN*60);
   cfTO=setTimeout(()=>{
     if(!cfRun) return;
     cfStage.innerHTML='<div style="display:grid;place-items:center;height:100%;color:var(--pencil);font-size:1.1rem;padding:0 1rem;text-align:center">they\u2019ve scattered. how many were there?</div>';
@@ -3131,15 +3232,15 @@ function cfSubmit(){
   cfMsg.innerHTML=`there were <b style="font-family:'Gochi Hand';font-size:1.2rem">${cfN}</b> — ${v} +${pts} pts`;
   cfGuess.style.visibility='hidden';
   tone(pts>=60?740:330,{d:.12,v:.04});
-  if(cfRound>=5) setTimeout(cfFinal,700);
+  if(cfRound>=CF_ROUNDS) setTimeout(cfFinal,700);
   else setTimeout(()=>{ if(cfRun) cfNext(); },1100);
 }
 function cfFinal(){
   cfRun=false;
-  const v=cfScore>=430?'a certified counting savant.':cfScore>=320?'eagle-eyed accountant.':cfScore>=200?'a respectable tally.':'the doodles outnumbered you. they usually do.';
-  cfMsg.innerHTML=`final: <b style="font-family:'Gochi Hand';font-size:1.3rem">${cfScore}</b>/500 — ${v}`;
+  const v=cfScore>=900?'a certified counting savant.':cfScore>=700?'eagle-eyed accountant.':cfScore>=500?'a respectable tally.':'the doodles outnumbered you. they usually do.';
+  cfMsg.innerHTML=`final: <b style="font-family:'Gochi Hand';font-size:1.3rem">${cfScore}</b>/1000 — ${v}`;
   cfBtn.textContent='count again'; cfBtn.hidden=false;
-  if(cfScore>=320) starBurst(cfStage,14);
+  if(cfScore>=700) starBurst(cfStage,14);
   [523,659,784].forEach((f,i)=>tone(f,{d:.14,v:.045,at:i*.09}));
 }
 cfGo.addEventListener('click',cfSubmit);
@@ -3365,6 +3466,22 @@ const OW=[
  {w:['Heart','Spade','Club','Comma'],odd:3,why:'a comma is punctuation; the rest are card suits'},
  {w:['Nile','Amazon','Danube','Sahara'],odd:3,why:'the Sahara is a desert; the rest are rivers'},
  {w:['Hammer','Ladder','Screwdriver','Wrench'],odd:1,why:'a ladder helps you climb; the rest help you hit or twist'},
+ {w:['Sun','Moon','Lamp','Star'],odd:2,why:'a lamp needs a plug; the rest glow on their own'},
+ {w:['Copper','Iron','Silver','Glass'],odd:3,why:'glass is not a metal; the rest are'},
+ {w:['Eagle','Falcon','Owl','Bat'],odd:3,why:'a bat is a mammal — the only flying one, but still'},
+ {w:['Dolphin','Shark','Whale','Seal'],odd:1,why:'a shark is a fish; the rest are marine mammals'},
+ {w:['Paris','Rome','Cairo','Saturn'],odd:3,why:'Saturn is a planet; the rest are capital cities'},
+ {w:['Trumpet','Flute','Drum','Thermometer'],odd:3,why:'a thermometer measures temperature, not music'},
+ {w:['Bread','Pasta','Rice','Marble'],odd:3,why:'marble is for statues and countertops, not dinner'},
+ {w:['Volcano','Geyser','Waterfall','Refrigerator'],odd:3,why:'a refrigerator is indoors and polite about it'},
+ {w:['Whisper','Shout','Murmur','Mumble'],odd:1,why:'a shout is the loud cousin of the group'},
+ {w:['Socks','Gloves','Hats','Forks'],odd:3,why:'a fork is cutlery; the rest are clothing'},
+ {w:['Guitar','Violin','Cello','Calculator'],odd:3,why:'a calculator does math, not melodies'},
+ {w:['Fog','Mist','Haze','Mount Rushmore'],odd:3,why:'Mount Rushmore is famously solid'},
+ {w:['Honey','Maple syrup','Jam','Motor oil'],odd:3,why:'motor oil is not for toast. please.'},
+ {w:['Square','Circle','Triangle','Tuesday'],odd:3,why:'Tuesday is a day; the rest are shapes'},
+ {w:['Rose','Lily','Lotus','Gravel'],odd:3,why:'gravel is rocks, not a bouquet'},
+ {w:['Ant','Bee','Butterfly','Rock band'],odd:3,why:'a rock band has drums, not six legs'},
 ];
 const owWrap=$('#owWrap'), owOut=$('#owOut'), owStreakEl=$('#owStreak'), owBestEl=$('#owBestEl');
 let owStreak=0, owBest=+(store.get('dd-oddword')||0), owCur=null, owAnswered=false, owUsed=[];
@@ -3413,9 +3530,9 @@ function owPick(btn){
   $('#owNext').addEventListener('click',owNew);
 }
 
-/* ═══════════ 24 · TYPE THE ALPHABET ═══════════ */
+/* ═══════════ 24 · TYPE THE ALPHABET (mobile keyboard ready) ═══════════ */
 const alNext=$('#alNext'), alProg=$('#alProg'), alTime=$('#alTime'), alBestEl=$('#alBestEl'),
-      alMsg=$('#alMsg'), alBtn=$('#alBtn');
+      alMsg=$('#alMsg'), alBtn=$('#alBtn'), alInput=$('#alInput');
 let alRun=false, alIdx=0, alT0=0, alPen=0, alBest=+(store.get('dd-alpha')||0);
 alBestEl.textContent=alBest?alBest.toFixed(2)+' s':'—';
 function alShow(){
@@ -3426,6 +3543,8 @@ function alArm(){
   alRun=true; alIdx=0; alPen=0; alT0=performance.now();
   alBtn.hidden=true; alMsg.textContent='go go go';
   alShow();
+  alInput.value='';
+  setTimeout(()=>alInput.focus(),80);
 }
 function alKey(k){
   if(!alRun) return;
@@ -3445,6 +3564,7 @@ function alFinish(){
   alRun=false;
   const t=(performance.now()-alT0)/1000+alPen;
   alNext.textContent='!';
+  alInput.blur();
   const nb=!alBest||t<alBest;
   if(nb){ alBest=t; store.set('dd-alpha',alBest); }
   alBestEl.textContent=alBest.toFixed(2)+' s';
@@ -3455,10 +3575,20 @@ function alFinish(){
   alBtn.textContent='go again'; alBtn.hidden=false;
 }
 alBtn.addEventListener('click',()=>{ if(!alRun) alArm(); });
+/* on phones (and desktop when the field is focused) the G-board types into this */
+alInput.addEventListener('input',()=>{
+  const v=alInput.value; alInput.value='';
+  if(!alRun) return;
+  for(const ch of v){
+    const c=ch.toLowerCase();
+    if(/[a-z]/.test(c)) alKey(c);
+  }
+});
 function alEnter(){
   alRun=false; alIdx=0;
   alNext.textContent='–'; alProg.textContent='0/26'; alTime.textContent='0.00 s';
-  alMsg.textContent='press start, then just\u2026 type';
+  alInput.value='';
+  alMsg.textContent='press start — on phones the keyboard opens for you';
   alBtn.textContent='start typing'; alBtn.hidden=false;
 }
 
@@ -3529,8 +3659,8 @@ const RPS_ICON={
  p:'<path d="M8.5 20c-2.2-1.2-3.5-3.4-3.5-6.3V7.6a1.4 1.4 0 0 1 2.8 0V12m0-4.6V5.5a1.4 1.4 0 0 1 2.8 0V11m0-6V4.6a1.4 1.4 0 0 1 2.8 0V11m0-5.4a1.4 1.4 0 0 1 2.8 0V13c0 4.2-2.1 6.8-4.9 7.6"/>',
  s:'<circle cx="6.4" cy="17.8" r="2.3"/><circle cx="6.4" cy="6.2" r="2.3"/><path d="M8.3 7.6 19 17.2M8.3 16.4 19 6.8"/>',
 };
-const BEATS={r:'s',p:'r',s:'p'};   /* key beats value */
-const COUNTER={r:'p',p:'s',s:'r'}; /* what beats key */
+const BEATS={r:'s',p:'r',s:'p'};
+const COUNTER={r:'p',p:'s',s:'r'};
 const rpsY=$('#rpsScoreY'), rpsI=$('#rpsScoreI'), rpsStreakEl=$('#rpsStreakEl'), rpsBestEl=$('#rpsBestEl'),
       rpsHandY=$('#rpsHandY'), rpsHandI=$('#rpsHandI'), rpsArena=$('#rpsArena'), rpsMsg=$('#rpsMsg'),
       rpsBtns=$$('.rps-ch');
@@ -3542,7 +3672,6 @@ function rpsLeave(){
   rpsBtns.forEach(b=>b.disabled=false);
 }
 function rpsAi(){
-  /* it reads your habits: early random, then hunts your favourite move */
   if(rpsHist.length<3||Math.random()<.3) return 'rps'[Math.floor(Math.random()*3)];
   const cnt={r:0,p:0,s:0};
   rpsHist.forEach(m=>cnt[m]++);
@@ -3592,96 +3721,139 @@ function rpsEnter(){
   rpsMsg.textContent='it has already formed opinions about you.';
 }
 
-/* ═══════════ 27 · THE STARE-OFF ═══════════ */
-const soFace=$('#soFace'), soTaunt=$('#soTaunt'), soCount=$('#soCount'), soMsg=$('#soMsg'),
-      soBtn=$('#soBtn'), soBait=$('#soBait'), soRoundEl=$('#soRoundEl'), soBestEl=$('#soBestEl'),
-      soBox=$('#soBox');
-let soRun=false, soMoved=0, soLast=null, soBlinkAt=0, soStartT=0, soLen=0, soRound=0,
-    soBest=+(store.get('dd-stare')||0), soTOs=[];
-soBestEl.textContent=soBest;
-const SO_TAUNTS=['your cursor is sweating.','is that a yawn forming?','i once out-stared a cat. a big one.','your eye is twitching. i can tell.','the wallpaper is more interesting, right?','nope. still here.','you blinked on the inside. that counts (it doesn\u2019t).','i could do this all decade.','thinking about moving? don\u2019t.','my eyes never get dry. doodle privileges.'];
-function soTO(fn,ms){ soTOs.push(setTimeout(fn,ms)); }
-function soLeave(){
-  soRun=false;
-  soTOs.forEach(clearTimeout); soTOs=[];
-  soFace.classList.remove('blink');
-  soBait.classList.remove('show');
+/* ═══════════ 27 · WHAT'S IT DRAWING? ═══════════ */
+const DR=[
+ {n:'a cat',p:'M30 40C30 25 70 25 70 40M30 40 25 22 38 32M70 40 75 22 62 32M25 55C25 75 75 75 75 55M38 50h.1M62 50h.1M45 62c3 3 7 3 10 0'},
+ {n:'a fish',p:'M20 50C30 32 60 32 72 50C60 68 30 68 20 50ZM72 50 88 38 84 50 88 62ZM32 46h.1M42 40C46 44 46 48 42 50'},
+ {n:'an umbrella',p:'M50 18C30 18 16 34 16 50M16 50C22 43 30 43 36 50M36 50C42 43 50 43 56 50M56 50C62 43 70 43 76 50M76 50C82 43 90 44 84 50M50 18 50 76C50 86 38 88 36 78'},
+ {n:'a rocket',p:'M50 12C60 22 64 36 62 50H38C36 36 40 22 50 12ZM38 50 30 66 40 60M62 50 70 66 60 60M42 62C42 74 46 82 50 88C54 82 58 74 58 62M50 34h.1'},
+ {n:'glasses',p:'M15 55C15 42 35 42 35 55C35 68 15 68 15 55ZM65 55C65 42 85 42 85 55C85 68 65 68 65 55ZM35 52C42 46 58 46 65 52M12 50 15 55M88 50 85 55'},
+ {n:'a house',p:'M18 80V52L50 26L82 52V80ZM18 52 50 26 82 52M30 58H40V68H30ZM42 80V64H58V80'},
+ {n:'the sun',p:'M50 50m-16 0a16 16 0 1 0 32 0a16 16 0 1 0-32 0M50 20V28M50 72V80M20 50H28M72 50H80M28 28 34 34M66 66 72 72M72 28 66 34M34 66 28 72'},
+ {n:'a sailboat',p:'M20 62H80L70 76H30ZM50 62V22M50 22C68 30 72 46 72 58H50'},
+ {n:'a tree',p:'M50 88V54M50 54C34 54 28 38 40 32M40 32C40 18 62 16 62 30M62 30C76 34 72 54 58 54M50 74 42 66M50 78 58 70'},
+ {n:'ice cream',p:'M36 46C30 30 40 16 50 16C60 16 70 30 64 46ZM36 46 50 90 64 46M44 28h.1M56 26h.1M50 36h.1'},
+ {n:'a clock',p:'M50 50m-30 0a30 30 0 1 0 60 0a30 30 0 1 0-60 0M50 30V50L64 58M50 50m-2 0a2 2 0 1 0 4 0a2 2 0 1 0-4 0'},
+ {n:'a shooting star',p:'M50 12 61 38 89 40 68 58 74 86 50 71 26 86 32 58 11 40 39 38ZM80 14 92 6M84 24 96 22'},
+ {n:'a heart',p:'M50 84C20 62 12 42 24 30C34 20 46 26 50 36C54 26 66 20 76 30C88 42 80 62 50 84Z'},
+ {n:'a cloud',p:'M30 66C20 66 18 54 28 52C28 40 44 36 50 44C56 34 74 38 72 50C84 50 84 66 72 66Z'},
+ {n:'lightning',p:'M56 10 34 50H48L40 90 68 44H54L62 10Z'},
+ {n:'a cup of chai',p:'M24 30H64V62C64 74 52 80 44 80C36 80 24 74 24 62ZM64 36H74C82 36 82 52 74 52H64M32 22C32 16 36 16 36 10M44 22C44 16 48 16 48 10'},
+];
+const drPath=$('#drPath'), drQ=$('#drQ'), drOpts=$('#drOpts'), drMsg=$('#drMsg'),
+      drBtn=$('#drBtn'), drRoundEl=$('#drRoundEl'), drScoreEl=$('#drScoreEl'),
+      drBestEl=$('#drBestEl'), drBar=$('#drBar'), drStage=$('#drStage');
+let drOrder=null, drPtr=0, drScore=0, drBest=+(store.get('dd-draw')||0),
+    drActive=false, drT0=0, drTotal=1, drAns=null, drLock=false, drTO=null;
+drBestEl.textContent=drBest;
+function drLeave(){ clearTimeout(drTO); drActive=false; drLock=false; drBar.style.width='0%'; }
+function drSquiggle(){
+  drPath.setAttribute('d','M20 55c8-25 45-25 52 2');
+  drPath.style.transition='none'; drPath.style.strokeDasharray='none'; drPath.style.strokeDashoffset='0';
 }
-addEventListener('mousemove',e=>{
-  if(currentDemo!=='stare'||!soRun) return;
-  if(performance.now()>=soBlinkAt) return;
-  if(soLast) soMoved+=Math.hypot(e.clientX-soLast.x,e.clientY-soLast.y);
-  soLast={x:e.clientX,y:e.clientY};
-  if(soMoved>13) soLose('you moved. glaringly.');
-},{passive:true});
-addEventListener('touchmove',()=>{
-  if(currentDemo==='stare'&&soRun&&performance.now()<soBlinkAt) soLose('touching counts as fidgeting.');
-},{passive:true});
-soBait.addEventListener('pointerdown',()=>{ if(soRun) soLose('the bonus was a lie. greed detected.'); });
-soBtn.addEventListener('click',soBegin);
-function soBegin(){
-  soTOs.forEach(clearTimeout); soTOs=[];
-  soRun=false; soMoved=0; soLast=null;
-  soBtn.hidden=true; soBait.classList.remove('show');
-  soFace.classList.remove('blink');
-  soMsg.textContent='';
-  let n=3;
-  soCount.hidden=false; soCount.textContent=n;
-  tone(500,{d:.08,v:.04});
-  (function tick(){
-    n--;
-    if(n>0){ soCount.textContent=n; tone(500,{d:.08,v:.04}); soTO(tick,900); }
-    else{ soCount.hidden=true; soStartStaring(); }
-  })();
+function drStart(){
+  drLeave();
+  drOrder=[...DR.keys()]; shuffle(drOrder);
+  drPtr=0; drScore=0;
+  drScoreEl.textContent=0; drBtn.hidden=true;
+  drNext();
 }
-function soStartStaring(){
-  soRun=true; soMoved=0; soLast=null;
-  soLen=Math.min(20000,6000+soRound*2500);
-  soStartT=performance.now();
-  soBlinkAt=soStartT+soLen;
-  soTaunt.textContent='DON\u2019T. MOVE.';
-  tone(880,{d:.1,v:.045});
-  soTO(function blink(){
-    if(!soRun) return;
-    soFace.classList.add('blink');
-    tone(240,{d:.12,v:.035});
-    soTO(()=>soWin(),520);
-  },soLen);
-  (function tauntStep(){
-    if(!soRun) return;
-    soTaunt.textContent=SO_TAUNTS[Math.floor(Math.random()*SO_TAUNTS.length)];
-    soTO(tauntStep,1700);
-  })();
-  soTO(()=>{ if(soRun) soBait.classList.add('show'); },soLen-3200);
+function drNext(){
+  clearTimeout(drTO);
+  drRoundEl.textContent=drPtr+1;
+  drQ.textContent='it is drawing\u2026';
+  drMsg.textContent='guess before the line finishes!';
+  drBar.style.width='100%';
+  const d=DR[drOrder[drPtr]];
+  drAns=d.n;
+  drPath.setAttribute('d',d.p);
+  const L=drPath.getTotalLength()||1;
+  drPath.style.transition='none';
+  drPath.style.strokeDasharray=L+' '+L;
+  drPath.style.strokeDashoffset=L;
+  drPath.getBoundingClientRect();
+  const dur=Math.max(3500,Math.min(8500,L*26));
+  drTotal=dur;
+  requestAnimationFrame(()=>{
+    drPath.style.transition=`stroke-dashoffset ${(dur/1000).toFixed(2)}s linear`;
+    drPath.style.strokeDashoffset='0';
+  });
+  drT0=performance.now();
+  drActive=true; drLock=false;
+  const others=DR.filter(x=>x.n!==d.n).map(x=>x.n);
+  shuffle(others);
+  const opts=shuffle([d.n,...others.slice(0,3)]);
+  drOpts.innerHTML='';
+  opts.forEach((o,i)=>{
+    const b=document.createElement('button');
+    b.className='ow-opt';
+    b.style.setProperty('--r',(i%2?1.1:-1.1)+'deg');
+    b.textContent=o;
+    b.addEventListener('click',()=>drPick(b,o));
+    drOpts.appendChild(b);
+  });
+  drTO=setTimeout(()=>{ if(drActive) drReveal(`time! it was ${drAns}.`); },dur+150);
 }
-function soWin(){
-  soRun=false; soRound++;
-  if(soRound>soBest){ soBest=soRound; store.set('dd-stare',soBest); soBestEl.textContent=soBest; }
-  soRoundEl.textContent=soRound;
-  soTaunt.textContent='ugh. fine. you win this one.';
-  soMsg.textContent=`it blinked! streak: ${soRound}. next time it holds out longer.`;
-  starBurst(soBox,12);
-  [660,880,1047].forEach((f,i)=>tone(f,{d:.12,v:.04,at:i*.09}));
-  soTO(()=>soFace.classList.remove('blink'),700);
-  soBtn.textContent='next round — it blinks later'; soBtn.hidden=false;
+function drPick(btn,choice){
+  if(!drActive||drLock) return;
+  drLock=true; drActive=false;
+  [...drOpts.children].forEach(b=>b.disabled=true);
+  drPath.style.transition='stroke-dashoffset .25s ease';
+  drPath.style.strokeDashoffset='0';
+  drBar.style.width='0%';
+  if(choice===drAns){
+    const rem=Math.max(0,1-(performance.now()-drT0)/drTotal);
+    const pts=Math.round(60+40*rem);
+    drScore+=pts; drScoreEl.textContent=drScore;
+    btn.classList.add('win');
+    drMsg.innerHTML=`${drAns} — correct! +${pts} pts${rem>.7?' (flash read!)':''}`;
+    tone(700,{d:.09,v:.045}); tone(940,{d:.1,v:.04,at:.08});
+    drTO=setTimeout(drAdvance,1000);
+  } else {
+    btn.classList.add('lose');
+    [...drOpts.children].forEach(b=>{ if(b.textContent===drAns) b.classList.add('win'); });
+    drMsg.innerHTML=`nope — it was ${drAns}. the pencil gloats.`;
+    tone(220,{d:.14,type:'square',v:.035});
+    drTO=setTimeout(drAdvance,1400);
+  }
 }
-function soLose(why){
-  if(!soRun) return;
-  soRun=false;
-  const held=(performance.now()-soStartT)/1000;
-  soRound=0;
-  soRoundEl.textContent=0;
-  soTaunt.textContent='that was a blink. i saw it. everyone saw it.';
-  soMsg.innerHTML=`${why} you held <b style="font-family:'Gochi Hand';font-size:1.2rem">${held.toFixed(1)}s</b> — it didn\u2019t even flinch.`;
-  soBtn.textContent='rematch'; soBtn.hidden=false;
-  soBait.classList.remove('show');
-  tone(200,{d:.2,type:'square',v:.035});
+function drReveal(why){
+  if(!drActive) return;
+  drActive=false; drLock=true;
+  [...drOpts.children].forEach(b=>b.disabled=true);
+  drPath.style.transition='stroke-dashoffset .3s ease';
+  drPath.style.strokeDashoffset='0';
+  drBar.style.width='0%';
+  drMsg.innerHTML=`${why} 0 pts.`;
+  tone(200,{d:.16,type:'square',v:.03});
+  drTO=setTimeout(drAdvance,1300);
 }
-function soEnter(){
-  soLeave();
-  soTaunt.textContent='it is watching you read this.';
-  soMsg.textContent='keep your cursor perfectly still — temptation included.';
-  soBtn.textContent='begin the contest'; soBtn.hidden=false;
+function drAdvance(){
+  drPtr++;
+  if(drPtr>=8) drFinal(); else drNext();
+}
+function drFinal(){
+  drQ.textContent='RESULTS';
+  drPath.setAttribute('d','M20 55c8-25 45-25 52 2M30 72c6 4 10 4 14 0M56 72c4 4 8 4 14 0');
+  drPath.style.transition='none'; drPath.style.strokeDasharray='none'; drPath.style.strokeDashoffset='0';
+  drOpts.innerHTML='';
+  if(drScore>drBest){ drBest=drScore; store.set('dd-draw',drBest); drBestEl.textContent=drBest; }
+  const v=drScore>=560?'certified doodle whisperer.':drScore>=420?'the pencil respects you now.':drScore>=280?'sharp-ish eye. growing.':'the doodles will draw slower next time. maybe.';
+  drMsg.innerHTML=`final: <b style="font-family:'Gochi Hand';font-size:1.3rem">${drScore}</b>/800 — ${v}`;
+  drBtn.textContent='draw again'; drBtn.hidden=false;
+  starBurst(drStage,14);
+  [523,659,784].forEach((f,i)=>tone(f,{d:.14,v:.045,at:i*.09}));
+}
+drBtn.addEventListener('click',()=>{ if(!drActive) drStart(); });
+function drEnter(){
+  drLeave();
+  drPtr=0; drScore=0;
+  drRoundEl.textContent=0; drScoreEl.textContent=0;
+  drSquiggle();
+  drOpts.innerHTML='';
+  drQ.textContent='it is waiting\u2026';
+  drMsg.textContent='press start when ready';
+  drBtn.textContent='start drawing'; drBtn.hidden=false;
 }
 
 /* ═══════════ coffee / easypaisa popup ═══════════ */
@@ -3730,9 +3902,14 @@ function master(now){
     const pt=p.getPointAtLength(e*(L-.5)), pt2=p.getPointAtLength(Math.min(L-.5,e*(L-.5)+2));
     const ang=Math.atan2(pt2.y-pt.y,pt2.x-pt.x)*180/Math.PI;
     trolleyG.setAttribute('transform',`translate(${pt.x} ${pt.y-6}) rotate(${ang})`);
+    lastTrX=pt.x; lastTrY=pt.y;
+    dustAcc+=dt;
+    if(dustAcc>105){ dustAcc=0; spawnDust(lastTrX-13,lastTrY+6); }
     if(k>=1){
       const yes=riding==='yes'; riding=null;
+      trolleyG.classList.remove('rolling');
       (yes?impactYes:impactNo).classList.add('show');
+      (yes?sparksYes:sparksNo).classList.add('show');
       (yes?bonkYes:bonkNo).classList.add('show');
       tScene.classList.add('shake'); setTimeout(()=>tScene.classList.remove('shake'),400);
       tone(120,{d:.18,type:'triangle',v:.06}); tone(90,{d:.2,v:.04,at:.05});
@@ -3755,6 +3932,10 @@ function master(now){
   if(currentDemo==='odd') odTick(now);
   if(currentDemo==='whack') wkTick(now);
   if(currentDemo==='stroop') stTick(now);
+  if(currentDemo==='draw'&&drActive){
+    const rem=Math.max(0,1-(now-drT0)/drTotal);
+    drBar.style.width=(rem*100)+'%';
+  }
   if(currentDemo==='alpha'&&alRun){
     alTime.textContent=((now-alT0)/1000+alPen).toFixed(2)+' s';
   }
