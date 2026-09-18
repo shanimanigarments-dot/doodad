@@ -35,7 +35,21 @@ a{color:inherit}
  animation:floaty var(--t,7s) ease-in-out infinite alternate}
 @keyframes floaty{from{transform:translateY(-7px) rotate(-2deg)}to{transform:translateY(7px) rotate(3deg)}}
 
-/* ═══════════ SIDE STICKMAN RAILS (homepage margins) ═══════════ */
+/* ═══════════ BUY ME A COFFEE (top corner) ═══════════ */
+.bmc{position:fixed;top:16px;right:16px;z-index:1200;display:flex;align-items:center;gap:.55rem;
+ background:#ffdd00;color:var(--ink);border:2.5px solid var(--ink);
+ border-radius:225px 15px 255px 15px/15px 255px 15px 225px;
+ padding:.4em .9em .4em .65em;box-shadow:3px 3px 0 var(--ink);text-decoration:none;
+ font-size:1.05rem;line-height:1.08;transform:rotate(1.4deg);transition:.15s}
+.bmc:hover{transform:rotate(-1deg) translateY(-2px);box-shadow:4px 5px 0 var(--ink)}
+.bmc svg{width:30px;flex:0 0 30px;height:auto;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bmc .steam path{fill:none;stroke:var(--ink);stroke-width:1.7;opacity:0;animation:steamUp 1.7s ease-in-out infinite}
+.bmc .steam path:nth-child(2){animation-delay:.55s}
+.bmc .steam path:nth-child(3){animation-delay:1.1s}
+@keyframes steamUp{0%{opacity:0;transform:translateY(2px)}30%{opacity:.85}100%{opacity:0;transform:translateY(-4px)}}
+@media(max-width:640px){.bmc{top:10px;right:10px;font-size:.9rem;padding:.32em .7em .32em .5rem}.bmc svg{width:24px;flex-basis:24px}}
+
+/* ═══════════ SIDE STICKMAN RAILS ═══════════ */
 .side-stuff{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
 @media(max-width:1150px){.side-stuff{display:none}}
 .rail{position:absolute;top:0;bottom:0;display:flex;flex-direction:column;justify-content:space-evenly;padding:10vh 0}
@@ -53,7 +67,6 @@ a{color:inherit}
  border-left:2px solid var(--ink);border-bottom:2px solid var(--ink);transform:rotate(45deg)}
 .rail.r .say::after{left:auto;right:-6px;transform:rotate(225deg)}
 @keyframes sayFloat{to{transform:translateY(-5px)}}
-/* jumping jack */
 #stm-jack{animation:jjump .62s ease-in-out infinite}
 @keyframes jjump{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 #stm-jack .armA{animation:armUp1 .62s ease-in-out infinite}
@@ -64,7 +77,6 @@ a{color:inherit}
 @keyframes armUp2{0%,100%{transform:rotate(-16deg)}50%{transform:rotate(-148deg)}}
 @keyframes legOut1{0%,100%{transform:rotate(7deg)}50%{transform:rotate(26deg)}}
 @keyframes legOut2{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(-26deg)}}
-/* walkers (homepage + overlay share these) */
 .walker svg{animation:bobw .27s ease-in-out infinite}
 .walker .legA{animation:legSw1 .55s ease-in-out infinite}
 .walker .legB{animation:legSw2 .55s ease-in-out infinite}
@@ -75,14 +87,11 @@ a{color:inherit}
 @keyframes legSw2{0%,100%{transform:rotate(-23deg)}50%{transform:rotate(23deg)}}
 @keyframes bobw{0%,100%{transform:translateY(0)}50%{transform:translateY(-2.5px)}}
 @keyframes dogbob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-2px) rotate(-3deg)}}
-/* reader */
 #stm-read .fliparm{animation:rflip 8s ease-in-out infinite}
 @keyframes rflip{0%,90%,100%{transform:rotate(0)}94%{transform:rotate(-13deg)}}
-/* headstand */
 #stm-head{transform:rotate(180deg)}
 #stm-head .legA{animation:legSw1 .9s ease-in-out infinite}
 #stm-head .legB{animation:legSw2 .9s ease-in-out infinite}
-/* juggler */
 #stm-jug .armA{animation:jarm1 .55s ease-in-out infinite alternate}
 #stm-jug .armB{animation:jarm2 .55s ease-in-out infinite alternate}
 @keyframes jarm1{from{transform:rotate(-8deg)}to{transform:rotate(14deg)}}
@@ -96,10 +105,8 @@ a{color:inherit}
 @keyframes juggle1{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(20px,-30px) rotate(180deg)}100%{transform:translate(0,6px) rotate(360deg)}}
 @keyframes juggle2{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(-20px,-30px) rotate(-180deg)}100%{transform:translate(0,6px) rotate(-360deg)}}
 @keyframes juggle3{0%{transform:translate(0,0) rotate(0)}50%{transform:translate(4px,-38px) rotate(220deg)}100%{transform:translate(0,6px) rotate(480deg)}}
-/* meditator */
 #stm-om svg{animation:omBob 3.4s ease-in-out infinite alternate}
 @keyframes omBob{from{transform:translateY(0)}to{transform:translateY(-6px)}}
-/* click celebration */
 .stm.cheer{animation:cheerr .55s ease}
 @keyframes cheerr{35%{transform:translateY(-16px) rotate(9deg)}70%{transform:translateY(0) rotate(-7deg)}}
 
@@ -180,7 +187,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .close:hover{transform:rotate(90deg) scale(1.06)}
 .close svg{width:20px;stroke:var(--ink);stroke-width:3;fill:none;stroke-linecap:round}
 
-/* ═══════════ OVERLAY DOODLE LAYER (fun filler inside games) ═══════════ */
+/* ---------- overlay doodle layer ---------- */
 .odeco{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .overlay.seamode .odeco{display:none}
 .oc{position:absolute;width:64px;opacity:.55;stroke:var(--ink);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;animation:floaty 8s ease-in-out infinite alternate}
@@ -227,7 +234,11 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .overlay[data-demo="pattern"] #demo-pattern,
 .overlay[data-demo="slides"]  #demo-slides,
 .overlay[data-demo="lights"]  #demo-lights,
-.overlay[data-demo="oddword"] #demo-oddword{display:block}
+.overlay[data-demo="oddword"] #demo-oddword,
+.overlay[data-demo="alpha"]   #demo-alpha,
+.overlay[data-demo="button"]  #demo-button,
+.overlay[data-demo="rps"]     #demo-rps,
+.overlay[data-demo="stare"]   #demo-stare{display:block}
 .demo-inner{max-width:860px;margin:0 auto;padding:88px 24px 80px}
 .demo h2{font-family:'Gochi Hand';font-weight:400;font-size:clamp(2.4rem,6vw,3.6rem);transform:rotate(-1.2deg)}
 .demo-sub{color:var(--pencil);font-size:1.2rem;margin:.4rem 0 1.6rem;transform:rotate(-.4deg)}
@@ -394,7 +405,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .lg-ref small{display:block;color:var(--pencil);font-size:.9rem;margin-top:.3rem}
 
 /* ---------- higher or lower ---------- */
-.ho-stats{display:flex;gap:1.6rem;justify-content:center;color:var(--pencil);margin-bottom:1.1rem}
+.ho-stats{display:flex;gap:1.6rem;justify-content:center;color:var(--pencil);margin-bottom:1.1rem;flex-wrap:wrap}
 .ho-stats b{font-family:'Gochi Hand';font-weight:400;font-size:1.6rem;color:var(--ink)}
 .ho-q{text-align:center;font-size:clamp(1.4rem,4vw,1.8rem);margin-bottom:1.2rem;transform:rotate(-.5deg)}
 .ho-row{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap}
@@ -465,7 +476,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .od-cell{aspect-ratio:1;cursor:pointer;transition:transform .08s;border:2.5px solid transparent}
 .od-cell:active{transform:scale(.93)!important}
 
-/* ---------- match the doodles (24 cards now) ---------- */
+/* ---------- match the doodles ---------- */
 .mt-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;max-width:620px;margin:0 auto}
 @media(max-width:700px){.mt-grid{grid-template-columns:repeat(4,1fr)}}
 .mt-card{aspect-ratio:.82;border:2.5px solid var(--ink);border-radius:14px 90px 14px 90px/90px 14px 90px 14px;background:var(--paper2);display:grid;place-items:center;box-shadow:3px 3px 0 rgba(47,42,35,.15);transition:transform .12s,background .2s,border-color .2s}
@@ -535,6 +546,47 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 .ow-opt.lose{opacity:.45}
 @media(max-width:480px){.ow-wrap{grid-template-columns:repeat(2,1fr);width:100%}}
 
+/* ---------- type the alphabet ---------- */
+.al-big{font-family:'Gochi Hand';font-size:clamp(4.5rem,18vw,7rem);text-align:center;line-height:1;color:var(--accent);min-height:1.1em}
+.al-stats{display:flex;gap:1.6rem;justify-content:center;color:var(--pencil);margin:.6rem 0 1rem;flex-wrap:wrap}
+.al-stats b{font-family:'Gochi Hand';font-weight:400;font-size:1.5rem;color:var(--ink)}
+
+/* ---------- suspicious button ---------- */
+.bt-wrap{max-width:480px;margin:0 auto;text-align:center;padding:1.8rem 1.2rem;position:relative}
+.bt-pot{font-family:'Gochi Hand';font-size:3rem;color:var(--accent);line-height:1}
+.bt-odds{color:var(--pencil);margin:.3rem 0 1.2rem}
+.bt-main{font-family:'Gochi Hand';font-size:1.7rem;padding:.55em 1.4em;border-radius:255px 15px 225px 15px/15px 225px 15px 255px;border:3px solid var(--ink);background:var(--paper2);box-shadow:5px 6px 0 var(--ink);transition:transform .1s,background .2s;user-select:none}
+.bt-main:active{transform:translate(3px,4px);box-shadow:1px 1px 0 var(--ink)}
+.bt-main:disabled{opacity:.55;box-shadow:3px 3px 0 var(--ink)}
+.bt-warm{background:#f6d7a0}
+.bt-hot{background:#f2b56b}
+.bt-crit{background:#f2937a}
+.bt-row{display:flex;gap:.8rem;justify-content:center;margin-top:1.2rem;flex-wrap:wrap}
+
+/* ---------- rock paper scissors ---------- */
+.rps-arena{display:flex;align-items:center;justify-content:center;gap:1.4rem;margin:1rem 0;min-height:130px;flex-wrap:wrap}
+.rps-hand{width:92px;height:92px;border:2.5px solid var(--ink);border-radius:50% 46% 54% 50%/48% 52% 48% 52%;background:#fffdf6;display:grid;place-items:center;box-shadow:3px 4px 0 rgba(47,42,35,.15)}
+.rps-hand svg{width:52px;height:52px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rps-vs{font-family:'Gochi Hand';font-size:1.6rem;color:var(--accent);min-width:120px;text-align:center}
+.rps-choices{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap}
+.rps-ch{padding:.6em 1em;border:2.5px solid var(--ink);background:#fffdf6;border-radius:18px 90px 18px 90px/90px 18px 90px 18px;box-shadow:3px 3px 0 var(--ink);transition:.12s;display:grid;place-items:center;gap:2px}
+.rps-ch svg{width:34px;height:34px;stroke:var(--ink);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.rps-ch span{font-size:.95rem;color:var(--pencil)}
+.rps-ch:hover:not(:disabled){transform:translateY(-3px) rotate(-2deg)}
+.rps-ch:disabled{opacity:.45;cursor:default}
+
+/* ---------- the stare-off ---------- */
+.so-box{max-width:520px;margin:0 auto;padding:1.6rem 1rem;text-align:center;position:relative;min-height:380px;display:flex;flex-direction:column;justify-content:center;gap:.9rem}
+.so-face{width:150px;margin:0 auto}
+.so-face svg{width:100%;stroke:var(--ink);fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.so-pupil{transform-box:fill-box;transform-origin:center;transition:transform .12s}
+.so-face.blink .so-pupil{transform:scaleY(.08)}
+.so-taunt{font-family:'Gochi Hand';font-size:1.45rem;min-height:1.4em}
+.so-msg{color:var(--pencil);font-size:1.05rem;min-height:1.4em}
+.so-count{font-family:'Gochi Hand';font-size:5rem;color:var(--accent);line-height:1}
+.so-bait{position:absolute;bottom:18px;left:50%;transform:translateX(-50%) rotate(-2deg);background:var(--gold);border:2.5px solid var(--ink);border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:.35em .9em;box-shadow:3px 3px 0 var(--ink);font-size:1rem;display:none}
+.so-bait.show{display:block;animation:rulepop .3s cubic-bezier(.3,1.6,.5,1)}
+
 @media(max-width:640px){
   .hero{padding-top:8vh}
   .project{margin-left:0}
@@ -557,7 +609,18 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   <span class="bgd" style="--x:60%;--y:90%;--s:.7;--t:8s" data-depth=".6"><svg viewBox="0 0 24 24"><path d="M4 18C10 14 14 10 20 5M20 5l-8 1M20 5l-1 8"/></svg></span>
 </div>
 
-<!-- ═══════════ SIDE STICKMEN — filling the empty margins ═══════════ -->
+<!-- ═══════════ BUY ME A COFFEE ═══════════ -->
+<a class="bmc" href="https://buymeacoffee.com/shayanahmad" target="_blank" rel="noopener" title="fuel for more doodles">
+  <svg viewBox="0 0 40 46">
+    <g class="steam"><path d="M13 11c-1.5-2 1.5-3 0-5"/><path d="M20 10c-1.5-2 1.5-3 0-5"/><path d="M27 11c-1.5-2 1.5-3 0-5"/></g>
+    <path d="M7 17h26v10c0 6.5-4.5 11-13 11S7 33.5 7 27Z" fill="#fff"/>
+    <path d="M33 19.5h2.6a4.8 4.8 0 0 1 0 9.6H32.6" fill="none"/>
+    <path d="M10 21h20" opacity=".4"/>
+  </svg>
+  <span>buy me a<br>coffee</span>
+</a>
+
+<!-- ═══════════ SIDE STICKMEN ═══════════ -->
 <aside class="side-stuff" aria-hidden="true">
   <div class="rail l">
     <div class="stm" id="stm-jack">
@@ -647,7 +710,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
     <svg class="circlet" viewBox="0 0 460 170" aria-hidden="true"><path d="M230 16C96 8 20 40 16 84c-4 48 94 76 216 74 124-2 216-26 214-70-2-44-96-70-200-68"/></svg>
   </span>
   <p class="subtitle">a junk drawer of tiny, extremely serious experiments</p>
-  <p class="hintline" id="hintline">the little rocket follows your cursor for free · press <b>1–9</b> · <b>0</b> · <b>b</b> · <b>q w e r t y u i</b> · <b>a s d f</b> to hop around</p>
+  <p class="hintline" id="hintline">the little rocket follows your cursor for free · press <b>1–9</b> · <b>0</b> · <b>b q w e r t y u i</b> · <b>a s d f</b> · <b>g h j k</b> to hop around</p>
   <svg class="divider" viewBox="0 0 110 20" aria-hidden="true"><path d="M10 4 11.4 8.6 16 10l-4.6 1.4L10 16l-1.4-4.6L4 10l4.6-1.4Z"/><path d="M55 2 56.8 8.2 63 10l-6.2 1.8L55 18l-1.8-6.2L47 10l6.2-1.8Z"/><path d="M100 4l1.4 4.6L106 10l-4.6 1.4L100 16l-1.4-4.6L94 10l4.6-1.4Z"/></svg>
 </header>
 
@@ -790,6 +853,30 @@ body.dark-cursor .puff{border-color:#f2e9d5}
     <span class="p-teaser">four words. three are cousins. evict the impostor.</span>
     <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
   </a>
+  <a class="project" href="#" data-demo="alpha" style="--rot:.8deg;--ml:-1.8rem;--pd:2.76s">
+    <span class="p-index">no.24</span>
+    <span class="p-name">Type the Alphabet<svg class="scribble" viewBox="0 0 220 12"><path d="M3 8C45 2 90 11 130 6c35-4 65 2 87-1"/></svg></span>
+    <span class="p-teaser">a to z against the clock. your keyboard has trained its whole life for this.</span>
+    <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
+  </a>
+  <a class="project" href="#" data-demo="button" style="--rot:-1deg;--ml:2.8rem;--pd:2.87s">
+    <span class="p-index">no.25</span>
+    <span class="p-name">The Suspicious Button<svg class="scribble" viewBox="0 0 220 12"><path d="M3 7C40 11 85 3 125 8c35 4 70-3 92 0"/></svg></span>
+    <span class="p-teaser">it pays you to press it. it might also pop. press, or be wise and cash out.</span>
+    <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
+  </a>
+  <a class="project" href="#" data-demo="rps" style="--rot:.7deg;--ml:-2.6rem;--pd:2.98s">
+    <span class="p-index">no.26</span>
+    <span class="p-name">Rock Paper Scissors<svg class="scribble" viewBox="0 0 220 12"><path d="M3 8C50 3 95 10 135 5c30-3 60 4 82 1"/></svg></span>
+    <span class="p-teaser">vs. a smug doodle that quietly studies your habits. bring your best lies.</span>
+    <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
+  </a>
+  <a class="project" href="#" data-demo="stare" style="--rot:-.8deg;--ml:2rem;--pd:3.09s">
+    <span class="p-index">no.27</span>
+    <span class="p-name">The Stare-Off<svg class="scribble" viewBox="0 0 220 12"><path d="M3 6C45 10 90 3 130 8c35 4 68-2 87 1"/></svg></span>
+    <span class="p-teaser">don't move the mouse. it will taunt you. it blinks first — if you're strong.</span>
+    <svg class="p-arrow" viewBox="0 0 28 28"><path d="M5 22C11 16 15 12 22 6M22 6h-8M22 6v8"/></svg>
+  </a>
 </nav>
 
 <footer>
@@ -805,7 +892,6 @@ body.dark-cursor .puff{border-color:#f2e9d5}
 <div class="overlay" id="overlay" hidden>
   <button class="close" id="closeBtn" aria-label="close"><svg viewBox="0 0 24 24"><path d="M5 5c4 4.5 10 10 14 14M19 5C15 9.5 9 15 5 19"/></svg></button>
 
-  <!-- doodle filler layer for inside the games -->
   <div class="odeco" aria-hidden="true">
     <svg class="oc otl" viewBox="0 0 60 60"><path d="M8 46C18 24 36 14 52 11M52 11l-10 2M52 11l-4 10"/><path d="M10 52c10-4 24-4 34 2" opacity=".5"/></svg>
     <svg class="oc otr" viewBox="0 0 60 60"><path d="M30 8C22 22 20 34 26 46c2 4 8 4 10-1 4-10-8-14-12-4"/><path d="M44 14c4-2 8-2 10 1" opacity=".5"/></svg>
@@ -1174,6 +1260,75 @@ body.dark-cursor .puff{border-color:#f2e9d5}
     <div class="ow-wrap" id="owWrap"></div>
     <div class="ho-out" id="owOut"></div>
   </div></section>
+
+  <!-- ═══ 24 · TYPE THE ALPHABET ═══ -->
+  <section class="demo" id="demo-alpha"><div class="demo-inner" style="max-width:600px">
+    <h2>Type the Alphabet</h2>
+    <p class="demo-sub">a → z against the clock. wrong keys cost half a second and a little dignity.</p>
+    <div class="al-big" id="alNext">–</div>
+    <div class="al-stats">
+      <span>progress <b id="alProg">0/26</b></span>
+      <span>time <b id="alTime">0.00 s</b></span>
+      <span>best <b id="alBestEl">—</b></span>
+    </div>
+    <p class="qd-sub" style="text-align:center;min-height:1.4em" id="alMsg">press start, then just… type</p>
+    <div style="text-align:center"><button class="btn accent" id="alBtn">start typing</button></div>
+  </div></section>
+
+  <!-- ═══ 25 · THE SUSPICIOUS BUTTON ═══ -->
+  <section class="demo" id="demo-button"><div class="demo-inner" style="max-width:620px">
+    <h2>The Suspicious Button</h2>
+    <p class="demo-sub">it pays you to press it. it might also pop. press — or be wise and cash out.</p>
+    <div class="bt-wrap card" id="btWrap">
+      <div class="bt-pot" id="btPot">10 pts</div>
+      <div class="bt-odds" id="btOdds">integrity: 100% · presses: 0</div>
+      <button class="bt-main" id="btBtn">press me (i'm fine)</button>
+      <p class="qd-sub" style="margin:.9rem 0 0" id="btMsg">the button says nothing can go wrong. the button is not a lawyer.</p>
+      <div class="bt-row">
+        <button class="btn accent" id="btCash" disabled>cash out</button>
+        <button class="btn ghost" id="btReset">new button</button>
+      </div>
+      <div class="c-best-line" style="margin-top:1rem">lifetime banked: <b id="btBankEl">0</b> pts · biggest cash-out: <b id="btBestEl">0</b></div>
+    </div>
+  </div></section>
+
+  <!-- ═══ 26 · ROCK PAPER SCISSORS ═══ -->
+  <section class="demo" id="demo-rps"><div class="demo-inner" style="max-width:640px">
+    <h2>Rock Paper Scissors</h2>
+    <p class="demo-sub">vs. a smug doodle that quietly studies your habits. bring your best lies.</p>
+    <div class="ho-stats">you <b id="rpsScoreY">0</b> · it <b id="rpsScoreI">0</b> · streak <b id="rpsStreakEl">0</b> · best streak <b id="rpsBestEl">0</b></div>
+    <div class="rps-arena card" style="padding:1rem 0">
+      <div class="rps-hand" id="rpsHandY"><span class="qd-sub">you</span></div>
+      <div class="rps-vs" id="rpsArena">choose…</div>
+      <div class="rps-hand" id="rpsHandI"><span class="qd-sub">it</span></div>
+    </div>
+    <p class="qd-sub" style="text-align:center;min-height:1.4em" id="rpsMsg">it has already formed opinions about you.</p>
+    <div class="rps-choices" id="rpsChoices">
+      <button class="rps-ch" data-m="r"><svg viewBox="0 0 24 24"><path d="M6.5 15.5c-2-2-1.6-5 .4-6l1.4-3.6c.6-1.4 2.7-1.2 2.9.3l.3 1.3c1.4-.6 2.7.4 2.6 1.9l.8.4c1.4.6 1.7 2.4.6 3.4l-2 2.3c-2 2-5.5 2-7 0Z"/><path d="M9.3 9.3l.4 1.8M12.2 8.7l.4 1.8"/></svg><span>rock</span></button>
+      <button class="rps-ch" data-m="p"><svg viewBox="0 0 24 24"><path d="M8.5 20c-2.2-1.2-3.5-3.4-3.5-6.3V7.6a1.4 1.4 0 0 1 2.8 0V12m0-4.6V5.5a1.4 1.4 0 0 1 2.8 0V11m0-6V4.6a1.4 1.4 0 0 1 2.8 0V11m0-5.4a1.4 1.4 0 0 1 2.8 0V13c0 4.2-2.1 6.8-4.9 7.6"/></svg><span>paper</span></button>
+      <button class="rps-ch" data-m="s"><svg viewBox="0 0 24 24"><circle cx="6.4" cy="17.8" r="2.3"/><circle cx="6.4" cy="6.2" r="2.3"/><path d="M8.3 7.6 19 17.2M8.3 16.4 19 6.8"/></svg><span>scissors</span></button>
+    </div>
+  </div></section>
+
+  <!-- ═══ 27 · THE STARE-OFF ═══ -->
+  <section class="demo" id="demo-stare"><div class="demo-inner" style="max-width:620px">
+    <h2>The Stare-Off</h2>
+    <p class="demo-sub">do not move the mouse. it will taunt you. it blinks first — if you're strong.</p>
+    <div class="so-box card" id="soBox">
+      <div class="zn-round" style="text-align:center">streak <span id="soRoundEl">0</span> · best <span id="soBestEl">0</span></div>
+      <div class="so-face" id="soFace"><svg viewBox="0 0 120 110">
+        <circle cx="60" cy="55" r="44"/>
+        <g><circle cx="45" cy="48" r="11" fill="#fff"/><circle class="so-pupil" cx="45" cy="48" r="5" fill="var(--ink)" stroke="none"/></g>
+        <g><circle cx="75" cy="48" r="11" fill="#fff"/><circle class="so-pupil" cx="75" cy="48" r="5" fill="var(--ink)" stroke="none"/></g>
+        <path d="M46 78c8 5 20 5 28 0"/>
+      </svg></div>
+      <div class="so-count" id="soCount" hidden>3</div>
+      <div class="so-taunt" id="soTaunt">it is watching you read this.</div>
+      <p class="so-msg" id="soMsg">keep your cursor perfectly still — temptation included.</p>
+      <button class="btn accent" id="soBtn">begin the contest</button>
+      <button class="so-bait" id="soBait">free bonus points — click</button>
+    </div>
+  </div></section>
 </div>
 
 <div class="toast" id="toast" role="status"></div>
@@ -1284,12 +1439,13 @@ function puff(){
 /* ═══════════ overlay plumbing ═══════════ */
 const overlay=$('#overlay');
 let currentDemo=null;
-const KEYMAP={'1':'password','2':'trolley','3':'spend','4':'sea','5':'life','6':'circle','7':'auction','8':'logo','9':'higher','0':'simon','b':'blind','q':'quick','w':'zone','e':'odd','r':'match','t':'tunnel','y':'whack','u':'stroop','i':'count','a':'pattern','s':'slides','d':'lights','f':'oddword'};
+const KEYMAP={'1':'password','2':'trolley','3':'spend','4':'sea','5':'life','6':'circle','7':'auction','8':'logo','9':'higher','0':'simon','b':'blind','q':'quick','w':'zone','e':'odd','r':'match','t':'tunnel','y':'whack','u':'stroop','i':'count','a':'pattern','s':'slides','d':'lights','f':'oddword','g':'alpha','h':'button','j':'rps','k':'stare'};
 const CLEANUPS={
   sea:()=>stopSea(), simon:()=>siStop(), logo:()=>{lgTimerEnd=0;},
   zone:()=>znLeave(), tunnel:()=>tnLeave(), whack:()=>wkLeave(),
   odd:()=>odLeave(), stroop:()=>stLeave(), count:()=>cfLeave(),
-  pattern:()=>ptLeave()
+  pattern:()=>ptLeave(), alpha:()=>{alRun=false;},
+  rps:()=>rpsLeave(), stare:()=>soLeave()
 };
 function leaveDemo(n){ if(n&&CLEANUPS[n]) CLEANUPS[n](); }
 function openDemo(name){
@@ -1321,6 +1477,10 @@ function openDemo(name){
   if(name==='slides') slEnter();
   if(name==='lights') loEnter();
   if(name==='oddword') owNew();
+  if(name==='alpha') alEnter();
+  if(name==='button') btState();
+  if(name==='rps') rpsEnter();
+  if(name==='stare') soEnter();
   tone(520,{d:.06,v:.035}); tone(780,{d:.08,v:.035,at:.06});
 }
 function closeDemo(){
@@ -1335,6 +1495,9 @@ function closeDemo(){
 addEventListener('keydown',e=>{
   if(e.key==='Escape'&&currentDemo){closeDemo(); return;}
   const typing=/INPUT|TEXTAREA/.test(document.activeElement.tagName);
+  if(!typing&&currentDemo==='alpha'&&/^[a-zA-Z]$/.test(e.key)){
+    e.preventDefault(); alKey(e.key.toLowerCase()); return;
+  }
   if(!typing){
     const d=KEYMAP[e.key.toLowerCase()];
     if(d){ openDemo(d); return; }
@@ -1573,8 +1736,6 @@ function buildSpend(){
   });
   led.addEventListener('click',e=>{
     const b=e.target.closest('.qbtn'); if(!b) return;
-    /* FIX: compare the string directly — "+b.dataset.a==='buy'" parsed as
-       "(+b.dataset.a)==='buy'" i.e. NaN==='buy' → always false → every button sold. */
     if(b.dataset.a==='buy') buy(+b.dataset.i); else sell(+b.dataset.i);
   });
 }
@@ -2531,7 +2692,7 @@ function odEnter(){
   odBtn.textContent='start'; odBtn.hidden=false;
 }
 
-/* ═══════════ 15 · MATCH THE DOODLES (16-shape pool, 24 cards) ═══════════ */
+/* ═══════════ 15 · MATCH THE DOODLES ═══════════ */
 const MT_ICONS=[
  '<path d="M12 3 13.6 10.4 22 12 13.6 13.6 12 22 10.4 13.6 2 12 10.4 10.4Z"/>',
  '<path d="M13 2 5 13h5l-1.5 9L19 10h-5.5Z"/>',
@@ -2551,7 +2712,7 @@ const MT_ICONS=[
  '<path d="M5 6h11v9a4 4 0 0 1-4 4H9a4 4 0 0 1-4-4Z"/><path d="M16 8h2.2a2.4 2.4 0 0 1 0 4.8H16"/><path d="M8.5 3.5c0 1-1 1-1 2M12 3.5c0 1-1 1-1 2" opacity=".55"/>',
 ];
 const MT_BACK='<svg viewBox="0 0 24 24"><path d="M8.6 8.8c.2-1.8 1.6-3 3.4-3 1.9 0 3.4 1.3 3.4 3.1 0 2.2-3 2.5-3 4.7"/><circle cx="12.4" cy="17.6" r=".5"/></svg>';
-const MT_PAIRS=12; /* 24 cards on the board */
+const MT_PAIRS=12;
 const mtGrid=$('#mtGrid'), mtMovesEl=$('#mtMoves'), mtBestEl=$('#mtBestEl'),
       mtMsg=$('#mtMsg'), mtBtn=$('#mtBtn');
 let mtOpen=[], mtLock=false, mtMoves=0, mtFound=0, mtBest=+(store.get('dd-match')||0);
@@ -3028,7 +3189,8 @@ function slScramble(){
     const opts=[];
     if(r>0)opts.push(blank-3); if(r<2)opts.push(blank+3);
     if(c>0)opts.push(blank-1); if(c<2)opts.push(blank+1);
-    const pick=opts.filter(o=>o!==last)[Math.floor(Math.random()*opts.filter(o=>o!==last).length)];
+    const cand=opts.filter(o=>o!==last);
+    const pick=cand[Math.floor(Math.random()*cand.length)];
     slBoard[blank]=slBoard[pick]; slBoard[pick]=0;
     last=blank; blank=pick;
   }
@@ -3114,7 +3276,7 @@ function loPress(i){
     [392,523,659,784].forEach((f,k)=>tone(f,{d:.16,v:.045,at:k*.1}));
   }
 }
-loBtn.addEventListener('click',()=>{ if(!loWon||true) loNew(); });
+loBtn.addEventListener('click',loNew);
 function loEnter(){ loNew(); }
 
 /* ═══════════ 23 · ODD CONCEPT OUT ═══════════ */
@@ -3123,7 +3285,7 @@ const OW=[
  {w:['Drum','Flute','Spoon','Violin'],odd:2,why:'a spoon is cutlery; the rest are instruments'},
  {w:['Mars','Venus','Nike','Jupiter'],odd:2,why:'Nike is a shoe brand (and a goddess); the rest are planets'},
  {w:['Bicycle','Bus','Submarine','Train'],odd:2,why:'submarines swim; the rest stick to land'},
- {w:['Piano','Guitar','Cactus','Harp'],odd:2,why:'a cactus is a plant with opinions about touching'},
+ {w:['Piano','Guitar','Cactus','Harp'],odd:2,why:'a cactus is a plant with strong opinions about touching'},
  {w:['Sphere','Cube','Pyramid','Triangle'],odd:3,why:'a triangle is flat; the rest are solid'},
  {w:['Everest','K2','Matterhorn','Mariana'],odd:3,why:'Mariana is a trench — it points the wrong way'},
  {w:['Bee','Ant','Beetle','Spider'],odd:3,why:'spiders have eight legs — not even technically insects'},
@@ -3181,6 +3343,277 @@ function owPick(btn){
   $('#owNext').addEventListener('click',owNew);
 }
 
+/* ═══════════ 24 · TYPE THE ALPHABET ═══════════ */
+const alNext=$('#alNext'), alProg=$('#alProg'), alTime=$('#alTime'), alBestEl=$('#alBestEl'),
+      alMsg=$('#alMsg'), alBtn=$('#alBtn');
+let alRun=false, alIdx=0, alT0=0, alPen=0, alBest=+(store.get('dd-alpha')||0);
+alBestEl.textContent=alBest?alBest.toFixed(2)+' s':'—';
+function alShow(){
+  alNext.textContent=String.fromCharCode(97+alIdx);
+  alProg.textContent=alIdx+'/26';
+}
+function alArm(){
+  alRun=true; alIdx=0; alPen=0; alT0=performance.now();
+  alBtn.hidden=true; alMsg.textContent='go go go';
+  alShow();
+}
+function alKey(k){
+  if(!alRun) return;
+  const want=String.fromCharCode(97+alIdx);
+  if(k===want){
+    alIdx++;
+    tone(440+alIdx*22,{d:.05,v:.035});
+    if(alIdx>=26){ alFinish(); return; }
+    alShow();
+  } else {
+    alPen+=.5;
+    alMsg.textContent=`that was \u201c${k}\u201d. the letter was \u201c${want}\u201d. +0.5 s of shame.`;
+    tone(160,{d:.09,type:'square',v:.03});
+  }
+}
+function alFinish(){
+  alRun=false;
+  const t=(performance.now()-alT0)/1000+alPen;
+  alNext.textContent='!';
+  const nb=!alBest||t<alBest;
+  if(nb){ alBest=t; store.set('dd-alpha',alBest); }
+  alBestEl.textContent=alBest.toFixed(2)+' s';
+  const v=t<9?'inhuman. blink for us.':t<13?'keyboard weapon.':t<18?'certified typist.':t<25?'respectably speedy.':t<35?'the alphabet fought back.':'\u2026did you type with your elbows?';
+  alMsg.innerHTML=`<b style="font-family:'Gochi Hand';font-size:1.3rem">${t.toFixed(2)} s</b> — ${v}${alPen?` (incl. ${alPen.toFixed(1)} s of shame)`:''}${nb?' new best!':''}`;
+  if(nb) starBurst(alNext.closest('.demo'),16);
+  [523,659,784].forEach((f,i)=>tone(f,{d:.12,v:.04,at:i*.09}));
+  alBtn.textContent='go again'; alBtn.hidden=false;
+}
+alBtn.addEventListener('click',()=>{ if(!alRun) alArm(); });
+function alEnter(){
+  alRun=false; alIdx=0;
+  alNext.textContent='–'; alProg.textContent='0/26'; alTime.textContent='0.00 s';
+  alMsg.textContent='press start, then just\u2026 type';
+  alBtn.textContent='start typing'; alBtn.hidden=false;
+}
+
+/* ═══════════ 25 · THE SUSPICIOUS BUTTON ═══════════ */
+const btBtn=$('#btBtn'), btCash=$('#btCash'), btReset=$('#btReset'), btPot=$('#btPot'),
+      btOdds=$('#btOdds'), btMsg=$('#btMsg'), btWrap=$('#btWrap'),
+      btBankEl=$('#btBankEl'), btBestEl=$('#btBestEl');
+let btPotV=10, btPresses=0, btPop=false,
+    btBank=+(store.get('dd-bank')||0), btBestPot=+(store.get('dd-bestpot')||0);
+btBankEl.textContent=Math.round(btBank).toLocaleString('en-US');
+btBestEl.textContent=Math.round(btBestPot).toLocaleString('en-US');
+const BT_LINES=['it seems stable. probably.','it hummed. is humming normal?','the warranty expired four seconds ago.','it is getting warmer.','it whispered your name.','do not look directly at it.','the engineers have left.','it is thinking about popping.','this is fine.','it has seen things.','the seams are\u2026 decorative.'];
+const btChance=p=>p<2?0:Math.min(.85,.09+(p-1)*.062);
+function btState(){
+  btPot.textContent=Math.round(btPotV).toLocaleString('en-US')+' pts';
+  const c=btChance(btPresses);
+  btOdds.textContent=`integrity: ${Math.round((1-c)*100)}% \u00b7 presses: ${btPresses}`;
+  btBtn.classList.remove('bt-warm','bt-hot','bt-crit');
+  if(btPresses>=7) btBtn.classList.add('bt-crit');
+  else if(btPresses>=5) btBtn.classList.add('bt-hot');
+  else if(btPresses>=3) btBtn.classList.add('bt-warm');
+  btBtn.textContent=btPresses?'press again':'press me (i\u2019m fine)';
+  btBtn.disabled=btPop;
+  btCash.disabled=btPop||btPresses<1;
+}
+function btPress(){
+  if(btPop) return;
+  if(Math.random()<btChance(btPresses)){ btPopNow(); return; }
+  btPotV*=rand(1.45,2.2);
+  btPresses++;
+  btBtn.classList.remove('shake'); void btBtn.offsetWidth; btBtn.classList.add('shake');
+  btMsg.textContent=BT_LINES[Math.min(BT_LINES.length-1,btPresses-1)];
+  tone(380+btPresses*46,{d:.07,v:.045});
+  btState();
+}
+function btPopNow(){
+  btPop=true; btState();
+  btPot.textContent='0 pts';
+  btBtn.textContent='it popped.';
+  btMsg.innerHTML=`<b style="color:var(--bad);font-family:'Gochi Hand';font-size:1.2rem">POP.</b> ${Math.round(btPotV).toLocaleString('en-US')} points, gone. the button regrets nothing.`;
+  btWrap.classList.remove('shake'); void btWrap.offsetWidth; btWrap.classList.add('shake');
+  tone(110,{d:.3,type:'sawtooth',v:.05}); tone(70,{d:.35,v:.04,at:.06});
+}
+function btDoCash(){
+  if(btPop||btPresses<1) return;
+  const got=Math.round(btPotV);
+  btBank+=got; store.set('dd-bank',btBank);
+  const nb=got>btBestPot;
+  if(nb){ btBestPot=got; store.set('dd-bestpot',btBestPot); }
+  btBankEl.textContent=Math.round(btBank).toLocaleString('en-US');
+  btBestEl.textContent=Math.round(btBestPot).toLocaleString('en-US');
+  btMsg.innerHTML=`banked <b style="font-family:'Gochi Hand';font-size:1.2rem">${got.toLocaleString('en-US')}</b> pts after ${btPresses} brave press${btPresses===1?'':'es'}.${nb?' new record!':''}`;
+  if(nb) starBurst(btWrap,14);
+  [523,659,784].forEach((f,i)=>tone(f,{d:.12,v:.045,at:i*.09}));
+  btPotV=10; btPresses=0; btPop=false; btState();
+}
+btBtn.addEventListener('click',btPress);
+btCash.addEventListener('click',btDoCash);
+btReset.addEventListener('click',()=>{
+  btPotV=10; btPresses=0; btPop=false;
+  btMsg.textContent='a fresh button. it promises nothing.';
+  btState();
+});
+
+/* ═══════════ 26 · ROCK PAPER SCISSORS ═══════════ */
+const RPS_ICON={
+ r:'<path d="M6.5 15.5c-2-2-1.6-5 .4-6l1.4-3.6c.6-1.4 2.7-1.2 2.9.3l.3 1.3c1.4-.6 2.7.4 2.6 1.9l.8.4c1.4.6 1.7 2.4.6 3.4l-2 2.3c-2 2-5.5 2-7 0Z"/><path d="M9.3 9.3l.4 1.8M12.2 8.7l.4 1.8"/>',
+ p:'<path d="M8.5 20c-2.2-1.2-3.5-3.4-3.5-6.3V7.6a1.4 1.4 0 0 1 2.8 0V12m0-4.6V5.5a1.4 1.4 0 0 1 2.8 0V11m0-6V4.6a1.4 1.4 0 0 1 2.8 0V11m0-5.4a1.4 1.4 0 0 1 2.8 0V13c0 4.2-2.1 6.8-4.9 7.6"/>',
+ s:'<circle cx="6.4" cy="17.8" r="2.3"/><circle cx="6.4" cy="6.2" r="2.3"/><path d="M8.3 7.6 19 17.2M8.3 16.4 19 6.8"/>',
+};
+const BEATS={r:'s',p:'r',s:'p'};   /* key beats value */
+const COUNTER={r:'p',p:'s',s:'r'}; /* what beats key */
+const rpsY=$('#rpsScoreY'), rpsI=$('#rpsScoreI'), rpsStreakEl=$('#rpsStreakEl'), rpsBestEl=$('#rpsBestEl'),
+      rpsHandY=$('#rpsHandY'), rpsHandI=$('#rpsHandI'), rpsArena=$('#rpsArena'), rpsMsg=$('#rpsMsg'),
+      rpsBtns=$$('.rps-ch');
+let rpsHist=[], rpsSY=0, rpsSI=0, rpsStreak=0, rpsBestS=+(store.get('dd-rps')||0), rpsBusy=false, rpsTOs=[];
+rpsBestEl.textContent=rpsBestS;
+function rpsLeave(){
+  rpsTOs.forEach(clearTimeout); rpsTOs=[];
+  rpsBusy=false;
+  rpsBtns.forEach(b=>b.disabled=false);
+}
+function rpsAi(){
+  /* it reads your habits: early random, then hunts your favourite move */
+  if(rpsHist.length<3||Math.random()<.3) return 'rps'[Math.floor(Math.random()*3)];
+  const cnt={r:0,p:0,s:0};
+  rpsHist.forEach(m=>cnt[m]++);
+  const fav='rps'.reduce((a,b)=>cnt[b]>cnt[a]?b:a);
+  const conf=.42+Math.min(.4,rpsHist.length*.04);
+  return Math.random()<conf?COUNTER[fav]:'rps'[Math.floor(Math.random()*3)];
+}
+function rpsPlay(m){
+  if(rpsBusy) return;
+  rpsBusy=true;
+  rpsBtns.forEach(b=>b.disabled=true);
+  rpsHandY.innerHTML=`<svg viewBox="0 0 24 24">${RPS_ICON[m]}</svg>`;
+  rpsHandI.innerHTML='<svg viewBox="0 0 24 24">'+RPS_ICON.r+'</svg>';
+  rpsArena.textContent='rock\u2026';
+  tone(300,{d:.06,v:.03});
+  rpsTOs.push(setTimeout(()=>{ rpsArena.textContent='paper\u2026'; tone(300,{d:.06,v:.03}); },420));
+  rpsTOs.push(setTimeout(()=>{
+    rpsArena.textContent='shoot!';
+    const a=rpsAi();
+    rpsHist.push(m);
+    rpsHandI.innerHTML=`<svg viewBox="0 0 24 24">${RPS_ICON[a]}</svg>`;
+    if(m===a){
+      rpsArena.textContent='tie.';
+      rpsMsg.textContent=['great minds, allegedly.','it nods respectfully.','suspiciously synchronized.'][Math.floor(Math.random()*3)];
+      tone(440,{d:.08,v:.035});
+    } else if(BEATS[m]===a){
+      rpsSY++; rpsStreak++;
+      if(rpsStreak>rpsBestS){ rpsBestS=rpsStreak; store.set('dd-rps',rpsBestS); rpsBestEl.textContent=rpsBestS; }
+      rpsArena.textContent='you win!';
+      rpsMsg.textContent=['it accuses you of cheating. rich.','it demands a recount.','it is \u201crecalibrating its strategy\u201d.','somewhere, a doodle sighs.',`beginner\u2019s luck. (round ${rpsHist.length})`][Math.floor(Math.random()*5)];
+      tone(700,{d:.09,v:.045}); tone(940,{d:.1,v:.04,at:.08});
+    } else {
+      rpsSI++; rpsStreak=0;
+      rpsArena.textContent='it wins.';
+      rpsMsg.textContent=['it saw that coming. it always does.','it called your pattern \u201cadorable\u201d.','stop leading with that.','it read you like a napkin.','the doodle remains smug.'][Math.floor(Math.random()*5)];
+      tone(220,{d:.14,type:'square',v:.035});
+    }
+    rpsY.textContent=rpsSY; rpsI.textContent=rpsSI; rpsStreakEl.textContent=rpsStreak;
+    rpsBtns.forEach(b=>b.disabled=false);
+    rpsBusy=false;
+  },880));
+}
+rpsBtns.forEach(b=>b.addEventListener('click',()=>rpsPlay(b.dataset.m)));
+function rpsEnter(){
+  rpsLeave();
+  rpsHist=rpsHist.slice(-6);
+  rpsMsg.textContent='it has already formed opinions about you.';
+}
+
+/* ═══════════ 27 · THE STARE-OFF ═══════════ */
+const soFace=$('#soFace'), soTaunt=$('#soTaunt'), soCount=$('#soCount'), soMsg=$('#soMsg'),
+      soBtn=$('#soBtn'), soBait=$('#soBait'), soRoundEl=$('#soRoundEl'), soBestEl=$('#soBestEl'),
+      soBox=$('#soBox');
+let soRun=false, soMoved=0, soLast=null, soBlinkAt=0, soStartT=0, soLen=0, soRound=0,
+    soBest=+(store.get('dd-stare')||0), soTOs=[];
+soBestEl.textContent=soBest;
+const SO_TAUNTS=['your cursor is sweating.','is that a yawn forming?','i once out-stared a cat. a big one.','your eye is twitching. i can tell.','the wallpaper is more interesting, right?','nope. still here.','you blinked on the inside. that counts (it doesn\u2019t).','i could do this all decade.','thinking about moving? don\u2019t.','my eyes never get dry. doodle privileges.'];
+function soTO(fn,ms){ soTOs.push(setTimeout(fn,ms)); }
+function soLeave(){
+  soRun=false;
+  soTOs.forEach(clearTimeout); soTOs=[];
+  soFace.classList.remove('blink');
+  soBait.classList.remove('show');
+}
+addEventListener('mousemove',e=>{
+  if(currentDemo!=='stare'||!soRun) return;
+  if(performance.now()>=soBlinkAt) return;
+  if(soLast) soMoved+=Math.hypot(e.clientX-soLast.x,e.clientY-soLast.y);
+  soLast={x:e.clientX,y:e.clientY};
+  if(soMoved>13) soLose('you moved. glaringly.');
+},{passive:true});
+addEventListener('touchmove',()=>{
+  if(currentDemo==='stare'&&soRun&&performance.now()<soBlinkAt) soLose('touching counts as fidgeting.');
+},{passive:true});
+soBait.addEventListener('pointerdown',()=>{ if(soRun) soLose('the bonus was a lie. greed detected.'); });
+soBtn.addEventListener('click',soBegin);
+function soBegin(){
+  soTOs.forEach(clearTimeout); soTOs=[];
+  soRun=false; soMoved=0; soLast=null;
+  soBtn.hidden=true; soBait.classList.remove('show');
+  soFace.classList.remove('blink');
+  soMsg.textContent='';
+  let n=3;
+  soCount.hidden=false; soCount.textContent=n;
+  tone(500,{d:.08,v:.04});
+  (function tick(){
+    n--;
+    if(n>0){ soCount.textContent=n; tone(500,{d:.08,v:.04}); soTO(tick,900); }
+    else{ soCount.hidden=true; soStartStaring(); }
+  })();
+}
+function soStartStaring(){
+  soRun=true; soMoved=0; soLast=null;
+  soLen=Math.min(20000,6000+soRound*2500);
+  soStartT=performance.now();
+  soBlinkAt=soStartT+soLen;
+  soTaunt.textContent='DON\u2019T. MOVE.';
+  tone(880,{d:.1,v:.045});
+  soTO(function blink(){
+    if(!soRun) return;
+    soFace.classList.add('blink');
+    tone(240,{d:.12,v:.035});
+    soTO(()=>soWin(),520);
+  },soLen);
+  (function tauntStep(){
+    if(!soRun) return;
+    soTaunt.textContent=SO_TAUNTS[Math.floor(Math.random()*SO_TAUNTS.length)];
+    soTO(tauntStep,1700);
+  })();
+  soTO(()=>{ if(soRun) soBait.classList.add('show'); },soLen-3200);
+}
+function soWin(){
+  soRun=false; soRound++;
+  if(soRound>soBest){ soBest=soRound; store.set('dd-stare',soBest); soBestEl.textContent=soBest; }
+  soRoundEl.textContent=soRound;
+  soTaunt.textContent='ugh. fine. you win this one.';
+  soMsg.textContent=`it blinked! streak: ${soRound}. next time it holds out longer.`;
+  starBurst(soBox,12);
+  [660,880,1047].forEach((f,i)=>tone(f,{d:.12,v:.04,at:i*.09}));
+  soTO(()=>soFace.classList.remove('blink'),700);
+  soBtn.textContent='next round — it blinks later'; soBtn.hidden=false;
+}
+function soLose(why){
+  if(!soRun) return;
+  soRun=false;
+  const held=(performance.now()-soStartT)/1000;
+  soRound=0;
+  soRoundEl.textContent=0;
+  soTaunt.textContent='that was a blink. i saw it. everyone saw it.';
+  soMsg.innerHTML=`${why} you held <b style="font-family:'Gochi Hand';font-size:1.2rem">${held.toFixed(1)}s</b> — it didn\u2019t even flinch.`;
+  soBtn.textContent='rematch'; soBtn.hidden=false;
+  soBait.classList.remove('show');
+  tone(200,{d:.2,type:'square',v:.035});
+}
+function soEnter(){
+  soLeave();
+  soTaunt.textContent='it is watching you read this.';
+  soMsg.textContent='keep your cursor perfectly still — temptation included.';
+  soBtn.textContent='begin the contest'; soBtn.hidden=false;
+}
+
 /* ═══════════ master loop ═══════════ */
 let lastFrame=performance.now();
 function master(now){
@@ -3231,6 +3664,9 @@ function master(now){
   if(currentDemo==='odd') odTick(now);
   if(currentDemo==='whack') wkTick(now);
   if(currentDemo==='stroop') stTick(now);
+  if(currentDemo==='alpha'&&alRun){
+    alTime.textContent=((now-alT0)/1000+alPen).toFixed(2)+' s';
+  }
 
   /* logo countdown */
   if(currentDemo==='logo'&&lgTimerEnd&&!lgRevealed){
