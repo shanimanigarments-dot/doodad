@@ -593,6 +593,38 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   .demo-inner{padding-top:76px}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* ═══════════ COFFEE / EASYPAISA OVERLAY ═══════════ */
+.bmc{text-align:left}
+.coffee{position:fixed;inset:0;z-index:2800;display:grid;place-items:center;padding:20px;
+ background:rgba(47,42,35,.45);opacity:0;pointer-events:none;transition:opacity .25s}
+.coffee.show{opacity:1;pointer-events:auto}
+.cq-card{position:relative;max-width:430px;width:100%;background:var(--paper);
+ border:2.5px solid var(--ink);border-radius:255px 18px 225px 18px/18px 225px 18px 255px;
+ box-shadow:6px 8px 0 rgba(47,42,35,.3);padding:1.5rem 1.4rem 1.4rem;text-align:center;
+ transform:rotate(-.6deg) scale(.96);transition:transform .25s;max-height:92vh;overflow-y:auto}
+.coffee.show .cq-card{transform:rotate(-.6deg) scale(1)}
+.cq-close{position:absolute;top:10px;right:10px;width:40px;height:40px;display:grid;place-items:center;
+ background:var(--paper);border:2.5px solid var(--ink);border-radius:55% 45% 60% 40%/40% 60% 45% 55%;
+ box-shadow:2px 2px 0 var(--ink);transition:.2s}
+.cq-close:hover{transform:rotate(90deg) scale(1.08)}
+.cq-close svg{width:15px;stroke:var(--ink);stroke-width:3;fill:none;stroke-linecap:round}
+.cq-mug{width:44px;margin:0 auto .2rem;stroke:var(--ink);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.cq-h{font-family:'Gochi Hand';font-size:2rem;transform:rotate(-1deg);line-height:1.1}
+.cq-sub{color:var(--pencil);font-size:1.02rem;margin:.25rem 0 1rem}
+.cq-frame{width:min(240px,62vw);margin:0 auto;padding:10px;background:#fffdf6;
+ border:2.5px solid var(--ink);border-radius:18px 60px 18px 60px/60px 18px 60px 18px;box-shadow:4px 5px 0 rgba(47,42,35,.15)}
+.cq-img{width:100%;display:block;image-rendering:pixelated;user-select:none}
+.cq-fall{display:none;justify-items:center;color:var(--pencil);font-size:.95rem;padding:.6rem .4rem;line-height:1.4}
+.cq-fall svg{width:62%;stroke:var(--pencil);fill:none;stroke-width:3;stroke-linecap:round}
+.cq-name{margin-top:.7rem;font-size:.9rem;letter-spacing:.12em;color:var(--pencil)}
+.cq-name b{color:var(--ink);font-weight:normal}
+.cq-steps{list-style:none;text-align:left;margin:1.1rem auto .2rem;max-width:330px;display:flex;flex-direction:column;gap:.55rem}
+.cq-steps li{display:flex;gap:.6rem;font-size:1.08rem;line-height:1.35;align-items:flex-start}
+.cq-n{flex:0 0 24px;width:24px;height:24px;border:2.2px solid var(--ink);border-radius:45% 55% 50% 50%/55% 45% 55% 45%;
+ display:grid;place-items:center;font-family:'Gochi Hand';background:#fffdf6;margin-top:1px}
+.cq-note{color:var(--pencil);font-size:.98rem;margin-top:.8rem;line-height:1.45}
+.cq-tag{display:inline-block;margin-top:.9rem;font-family:'Gochi Hand';font-size:1.05rem;color:var(--accent);
+ border:2px dashed rgba(217,93,57,.55);border-radius:225px 15px 255px 15px/15px 255px 15px 225px;padding:.25em .9em;transform:rotate(1.2deg)}
 </style>
 </head>
 <body>
@@ -609,8 +641,8 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   <span class="bgd" style="--x:60%;--y:90%;--s:.7;--t:8s" data-depth=".6"><svg viewBox="0 0 24 24"><path d="M4 18C10 14 14 10 20 5M20 5l-8 1M20 5l-1 8"/></svg></span>
 </div>
 
-<!-- ═══════════ BUY ME A COFFEE ═══════════ -->
-<a class="bmc" href="https://buymeacoffee.com/shayanahmad" target="_blank" rel="noopener" title="fuel for more doodles">
+<!-- ═══════════ BUY ME A COFFEE (opens Easypaisa QR) ═══════════ -->
+<button class="bmc" id="bmcBtn" title="fuel for more doodles">
   <svg viewBox="0 0 40 46">
     <g class="steam"><path d="M13 11c-1.5-2 1.5-3 0-5"/><path d="M20 10c-1.5-2 1.5-3 0-5"/><path d="M27 11c-1.5-2 1.5-3 0-5"/></g>
     <path d="M7 17h26v10c0 6.5-4.5 11-13 11S7 33.5 7 27Z" fill="#fff"/>
@@ -618,7 +650,7 @@ body.dark-cursor .puff{border-color:#f2e9d5}
     <path d="M10 21h20" opacity=".4"/>
   </svg>
   <span>buy me a<br>coffee</span>
-</a>
+</button>
 
 <!-- ═══════════ SIDE STICKMEN ═══════════ -->
 <aside class="side-stuff" aria-hidden="true">
@@ -1331,6 +1363,43 @@ body.dark-cursor .puff{border-color:#f2e9d5}
   </div></section>
 </div>
 
+<!-- ═══════════ EASYPAISA QR POPUP ═══════════ -->
+<div class="coffee" id="coffeeOv" aria-hidden="true">
+  <div class="cq-card" role="dialog" aria-modal="true" aria-label="Support via Easypaisa">
+    <button class="cq-close" id="cqClose" aria-label="close"><svg viewBox="0 0 24 24"><path d="M5 5c4 4.5 10 10 14 14M19 5C15 9.5 9 15 5 19"/></svg></button>
+    <svg class="cq-mug" viewBox="0 0 40 46"><g class="steam"><path d="M13 11c-1.5-2 1.5-3 0-5"/><path d="M20 10c-1.5-2 1.5-3 0-5"/><path d="M27 11c-1.5-2 1.5-3 0-5"/></g><path d="M7 17h26v10c0 6.5-4.5 11-13 11S7 33.5 7 27Z"/><path d="M33 19.5h2.6a4.8 4.8 0 0 1 0 9.6H32.6"/></svg>
+    <div class="cq-h">buy the doodles a chai</div>
+    <p class="cq-sub">scan with Easypaisa — or any camera app</p>
+    <div class="cq-frame">
+      <!-- ▼▼ YOUR QR: keep easypaisa-qr.png next to this HTML file,
+           or paste a base64 data-URI here instead ▼▼ -->
+      <img class="cq-img" src="easypaisa-qr.png" alt="Easypaisa QR code" draggable="false"
+           onerror="this.style.display='none';document.getElementById('epFall').style.display='grid'">
+      <div class="cq-fall" id="epFall">
+        <svg viewBox="0 0 120 120">
+          <rect x="8" y="8" width="30" height="30"/><rect x="15" y="15" width="16" height="16"/>
+          <rect x="82" y="8" width="30" height="30"/><rect x="89" y="15" width="16" height="16"/>
+          <rect x="8" y="82" width="30" height="30"/><rect x="15" y="89" width="16" height="16"/>
+          <rect x="52" y="12" width="8" height="8"/><rect x="66" y="24" width="8" height="8"/>
+          <rect x="50" y="42" width="8" height="8"/><rect x="78" y="52" width="8" height="8"/>
+          <rect x="90" y="66" width="8" height="8"/><rect x="52" y="66" width="8" height="8"/>
+          <rect x="64" y="88" width="8" height="8"/><rect x="86" y="96" width="8" height="8"/>
+        </svg>
+        <p>QR missing — save your Easypaisa QR<br>as <b>easypaisa-qr.png</b> next to this HTML file</p>
+      </div>
+    </div>
+    <!-- ▼ edit the name below if you like ▼ -->
+    <div class="cq-name">EASYPAISA · <b>Shayan Ahmad</b></div>
+    <ol class="cq-steps">
+      <li><span class="cq-n">1</span><span>Open the <b>Easypaisa app</b> — or any camera app that scans QR codes.</span></li>
+      <li><span class="cq-n">2</span><span>Point the scanner at this code and enter any amount — even one chai counts.</span></li>
+      <li><span class="cq-n">3</span><span>Confirm, and the stickmen immediately get snack funding.</span></li>
+    </ol>
+    <p class="cq-note">on a phone? screenshot this code now, then scan it from your gallery later.</p>
+    <span class="cq-tag">shukriya! every rupee goes into ink, snacks &amp; silly ideas</span>
+  </div>
+</div>
+
 <div class="toast" id="toast" role="status"></div>
 <div class="grain" aria-hidden="true"></div>
 
@@ -1493,6 +1562,7 @@ function closeDemo(){
  $$('.project').forEach(a=>a.addEventListener('click',e=>{e.preventDefault(); openDemo(a.dataset.demo);}));
  $('#closeBtn').addEventListener('click',closeDemo);
 addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&coffeeOpen){coffeeClose(); return;}
   if(e.key==='Escape'&&currentDemo){closeDemo(); return;}
   const typing=/INPUT|TEXTAREA/.test(document.activeElement.tagName);
   if(!typing&&currentDemo==='alpha'&&/^[a-zA-Z]$/.test(e.key)){
@@ -3613,6 +3683,27 @@ function soEnter(){
   soMsg.textContent='keep your cursor perfectly still — temptation included.';
   soBtn.textContent='begin the contest'; soBtn.hidden=false;
 }
+
+/* ═══════════ coffee / easypaisa popup ═══════════ */
+const coffeeOv=$('#coffeeOv');
+let coffeeOpen=false;
+function coffeeShow(){
+  coffeeOpen=true;
+  coffeeOv.classList.add('show');
+  coffeeOv.setAttribute('aria-hidden','false');
+  document.body.classList.add('locked');
+  tone(620,{d:.08,v:.04}); tone(930,{d:.1,v:.04,at:.07});
+}
+function coffeeClose(){
+  coffeeOpen=false;
+  coffeeOv.classList.remove('show');
+  coffeeOv.setAttribute('aria-hidden','true');
+  if(!currentDemo) document.body.classList.remove('locked');
+  tone(440,{d:.07,v:.03});
+}
+ $('#bmcBtn').addEventListener('click',coffeeShow);
+ $('#cqClose').addEventListener('click',coffeeClose);
+coffeeOv.addEventListener('click',e=>{ if(e.target===coffeeOv) coffeeClose(); });
 
 /* ═══════════ master loop ═══════════ */
 let lastFrame=performance.now();
